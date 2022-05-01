@@ -1,0 +1,13 @@
+img{
+    width: 150px;
+    //Hex color background: #f8f9fa
+}
+.navBar{
+    margin: 0;
+    padding: 0;
+    .navLinks{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+}
