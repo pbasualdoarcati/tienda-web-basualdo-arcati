@@ -2,7 +2,7 @@
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Button } from 'react-bootstrap';
 
-function IconCart(){
+function CartWidget(){
     
     const cantidadElementos = 0;
     const showMe = () =>{
@@ -17,4 +17,4 @@ function IconCart(){
     )
 }
 
-export default IconCart
+export default CartWidget

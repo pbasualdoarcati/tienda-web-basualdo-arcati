@@ -4,14 +4,14 @@ import './NavBar.scss';
 //Components
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import LogoTienda from '../images/LogoTienda.png';
-import IconCart from './IconCart'
+import CartWidget from './CartWidget'
 
 
 
 
 function NavBar(){
     return (
-          <Navbar bg="light" variant="light" expand="lg" className="d-flex justify-content-between navBar">
+          <Navbar bg="light" variant="light" expand="lg" className="d-flex justify-content-between sticky-top navBar">
               <Navbar.Brand><img src={LogoTienda} alt="Logo tienda" /></Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav" className="navLinks">
@@ -27,7 +27,7 @@ function NavBar(){
                     <NavDropdown.Item href="#action/3.7">Varios</NavDropdown.Item>
                   </NavDropdown>
                   <Nav.Link href="#link">GitHub</Nav.Link>
-                  <IconCart/>
+                  <CartWidget/>
                 </Nav>
               </Navbar.Collapse>
           </Navbar>
