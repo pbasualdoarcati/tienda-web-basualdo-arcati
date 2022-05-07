@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  background-image: url('../public/images/fondo.jpg');
+  background-size: contain;
+  background-repeat: repeat;
+  min-height: 100vh;
 }
 
 .App-logo {
