@@ -2,14 +2,27 @@
 import './ItemListContainer.scss'
 //Components
 import { Card } from 'react-bootstrap';
-
-
+import ItemCount from '../ItemCount/ItemCount'
 
 function ItemListContainer (){
+
+
+
     return(
         <>
         <Card className='cardContainer'>
-            <Card.Body>This is some text within a card body.</Card.Body>
+            <Card.Body>
+                <ItemCount 
+                stock = 'stock'
+                totalStore = 'totalStore'
+                onAdd ='onAdd' 
+                offAdd='offAdd' 
+                disableButtonRest = 'disableButtonRest' 
+                disableButton = 'disableButton'
+
+                />
+            </Card.Body>
+            
         </Card>
         </>
     )
