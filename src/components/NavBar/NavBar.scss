@@ -8,6 +8,95 @@ img{
     .navLinks{
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: space-between;
+        .navElement{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            @media (max-width: 1024px) {
+                    display: none;
+                    visibility: hidden;
+            }
+        }
+    }
+    .nav__menuHamburger  {
+
+        position: fixed;
+        z-index: 1500;
+        background-color: rgba(255,255,255, .9);
+        width: 80%;
+        height: 100%;
+        top: 0px;
+        left: 0;
+        right: 0;
+        transition: transform .3s ease;
+        transform: translate(150%, 0); 
+        .nav__menuHamburgerNav {
+            padding-top: 50px;
+            .nav__menuHamburger--item {
+                list-style: none;
+                font-family: 'Roboto', sans-serif;
+                font-style: normal;
+                font-size: 1.4rem;
+                font-weight: medium;
+                opacity: 1;
+                text-align: left;
+                color: grey;
+                padding: 1rem 1rem;
+        
+                .nav-link {
+                    color: #000;
+                }
+                .nav-link:hover {
+                    color: rgb(177, 43, 43);
+                }
+            }
+        }
+        @media (min-width: 1024px) {
+                display: none;
+                visibility: hidden;
+        }
+       
+    }
+    .nav__menuHamburger--close {
+        margin-right: 300px;
+        height: 100px;
+        width: 40px;
+        font-size: 2rem;
+        border: none;
+        background-color: white;
+        border-color: #000;
+        border-radius: 2px solid #000;
+    }
+    .nav__menuHamburger.is-active{
+        transition: transform .3s ease;
+        transform: translate(50%,0);
+    }
+    .nav__menu {
+
+        width: 100%;
+        border-bottom: 1px solid #E0752F;
+
+        .navbar-toggler {
+            margin-right: 18px;
+        }
+        
+        position: absolute ;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        z-index: 1000;
+
+        @media (max-width: 1280px){
+            padding-left: 1rem!important;
+        }
+        
+        @media (max-width: 768px){
+            padding-left: .5rem!important;
+            flex-direction: row;
+        }  
     }
 }

@@ -1,0 +1,15 @@
+.buttonSearch{
+    width: 150px;
+}
+
+.buttonSearch:focus-within {
+    width: 15%;
+}
+
+.buttonSearch:hover{
+    width: 15%;
+    transition: all 1s;
+    @media (max-width: 1024px) {
+    width: 15rem;
+}
+}
