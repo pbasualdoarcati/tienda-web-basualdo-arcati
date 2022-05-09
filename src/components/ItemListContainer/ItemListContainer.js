@@ -1,15 +1,19 @@
-//Styles
-import './ItemListContainer.scss'
 //Components
 import { Card } from 'react-bootstrap';
+import ItemList from '../ItemList/ItemList';
 
-
+//Styles
+import './ItemListContainer.scss'
 
 function ItemListContainer (){
+
+
     return(
         <>
         <Card className='cardContainer'>
-            <Card.Body>This is some text within a card body.</Card.Body>
+            <Card.Body className='itemList'>
+                <ItemList />
+            </Card.Body>
         </Card>
         </>
     )
