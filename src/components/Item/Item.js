@@ -1,8 +1,9 @@
 // Components
+import { Button } from 'bootstrap';
 import React from 'react'
 import { Card } from 'react-bootstrap';
 import ItemCount from '../ItemCount/ItemCount';
-import { useState } from 'react';
+
 
 //Styles
 
@@ -10,30 +11,18 @@ import './Item.scss'
 
 function Item({item}) {
 
-          
-    const [stock, setStock] = useState(0)
-    const [totalStore, setTotalStore] = useState (10)
-   
-    const onAdd = () =>{
-        setStock(stock+1)
-        setTotalStore (totalStore-1)
-    }
-    const offAdd = () =>{
-        setStock (stock-1)
-        setTotalStore (totalStore+1)
-    }
-
-    let disableButtonRest = false
-    let disableButton = false
-    if (stock === 0){
-        disableButtonRest = true
-    }
-    if (stock === 10){
-        disableButton = true
-    }
+    let initial = 0
+    let stock = 10     
 
 
 
+    const onAdd = ()=>{
+      console.log(`Aca deberia tener la cantidad de items`);
+    }
+
+    const prueba = (e)=>{
+      console.log(e.target.id);
+    }
   return (
     <>
         {
@@ -49,12 +38,11 @@ function Item({item}) {
                       </Card.Text>
                       <ItemCount 
                         stock = {stock}
-                        totalStore = {totalStore}
-                        onAdd = {onAdd} 
-                        offAdd= {offAdd}
-                        disableButtonRest = {disableButtonRest} 
-                        disableButton = {disableButton}
+                        initial ={initial}
+                        onAdd = {onAdd}
                         />
+                        <button className='btn btn-warning detaills' id={oneItem.id} onClick={prueba}>Ver detalles</button>
+
                     </Card.Body>
                 </Card>
               </div>
