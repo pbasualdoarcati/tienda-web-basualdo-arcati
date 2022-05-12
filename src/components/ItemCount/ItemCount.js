@@ -13,13 +13,10 @@ function ItemCount({stock, initial, onAdd}) {
 
   const [counterItem, setCounterItem] = useState(initial)
 
-  const handlerClickAdd = () =>{
-      setCounterItem(counterItem + 1)
+  const handlerClick = (num) =>{
+      setCounterItem(counterItem + num)
   }
 
-  const handlerClickRest = () =>{
-      setCounterItem(counterItem - 1)
-  }
 
 // Control de botones ante el stock y cantidad de items
 
@@ -38,11 +35,13 @@ if (counterItem >= stock){
     <div>
         <p> Total store: {stock - counterItem}</p>
         <div>
-            <Button variant="primary" disabled={disableButton} className='itemButton' onClick={handlerClickAdd}> + </Button> 
-                <span> {counterItem} </span>
-            <Button variant="primary" disabled={disableButtonRest} className='itemButton' onClick={handlerClickRest}> - </Button>
+            <Button variant="primary" disabled={disableButtonRest} className='itemButton' onClick={() => handlerClick(-1)}> - </Button>
+             
+             <span> {counterItem} </span>
+
+            <Button variant="primary" disabled={disableButton} className='itemButton' onClick={() =>handlerClick(+1)}> + </Button> 
         </div>
-        <Button variant= 'success' disabled={disableButtonRest} className='itemButton' onClick={onAdd}>Agregar al Carrito</Button>
+        <Button variant= 'success' disabled={disableButtonRest} className='itemButton' onClick={() => onAdd (counterItem)}>Agregar al Carrito</Button>
 
 </div>
     
