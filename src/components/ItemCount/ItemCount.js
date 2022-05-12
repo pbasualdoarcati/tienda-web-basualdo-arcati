@@ -28,7 +28,7 @@ if(counterItem === 0){
   disableButtonRest = true
 }
 
-//Si el contador es mayor que el stock, desactivo el boton +
+//Si el contador es mayor o igual que el stock, desactivo el boton +
 if (counterItem >= stock){
   disableButton = true
 }
