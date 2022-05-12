@@ -12,9 +12,6 @@ import './Item.scss'
 function Item({item}) {
 
     let initial = 0
-    let stock = 10     
-
-
 
     const onAdd = ()=>{
       console.log(`Aca deberia tener la cantidad de items`);
@@ -36,8 +33,11 @@ function Item({item}) {
                       <Card.Text>
                         {oneItem.description.substring(0, 30)}
                       </Card.Text>
+                      <Card.Text>
+                        Cantidad en stock: {oneItem.stock}
+                      </Card.Text>
                       <ItemCount 
-                        stock = {stock}
+                        stock = {oneItem.stock}
                         initial ={initial}
                         onAdd = {onAdd}
                         />
