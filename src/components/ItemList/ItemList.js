@@ -22,7 +22,6 @@ function ItemList() {
             for(let item of apiData){
                 item.stock = Math.floor(Math.random() * 60) + 1;
             }
-            console.log(apiData)
         })
         .catch( err =>{
             swal({

@@ -12,9 +12,6 @@ import './Item.scss'
 function Item({item}) {
 
     let initial = 0
-    let stock = 10     
-
-
 
     const onAdd = ()=>{
       console.log(`Aca deberia tener la cantidad de items`);
