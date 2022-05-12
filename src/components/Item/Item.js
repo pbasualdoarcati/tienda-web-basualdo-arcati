@@ -1,7 +1,6 @@
 // Components
-import { Button } from 'bootstrap';
 import React from 'react'
-import { Card } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 import ItemCount from '../ItemCount/ItemCount';
 
 
@@ -13,8 +12,8 @@ function Item({item}) {
 
     let initial = 0
 
-    const onAdd = ()=>{
-      console.log(`Aca deberia tener la cantidad de items`);
+    const onAdd = (cantidad)=>{
+      console.log(`Cantidad de items en el carrito: ` + cantidad);
     }
 
     const prueba = (e)=>{
@@ -41,7 +40,7 @@ function Item({item}) {
                         initial ={initial}
                         onAdd = {onAdd}
                         />
-                        <button className='btn btn-warning detaills' id={oneItem.id} onClick={prueba}>Ver detalles</button>
+                        <Button variant= 'warning' className='detaills' id={oneItem.id} onClick={prueba}>Ver detalles</Button>
 
                     </Card.Body>
                 </Card>
