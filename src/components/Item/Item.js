@@ -36,8 +36,11 @@ function Item({item}) {
                       <Card.Text>
                         {oneItem.description.substring(0, 30)}
                       </Card.Text>
+                      <Card.Text>
+                        Cantidad en stock: {oneItem.stock}
+                      </Card.Text>
                       <ItemCount 
-                        stock = {stock}
+                        stock = {oneItem.stock}
                         initial ={initial}
                         onAdd = {onAdd}
                         />

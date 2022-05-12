@@ -19,6 +19,10 @@ function ItemList() {
         .then( resp =>{
             const apiData = resp.data
             setItems(apiData)
+            for(let item of apiData){
+                item.stock = Math.floor(Math.random() * 60) + 1;
+            }
+            console.log(apiData)
         })
         .catch( err =>{
             swal({
