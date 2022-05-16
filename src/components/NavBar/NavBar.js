@@ -1,11 +1,13 @@
 //Components
+import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import { Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
-import CartWidget from '../CarWidget/CartWidget'
-import SearchButton from '../SearchButton/SearchButton'
+import { Button, Nav, Navbar } from "react-bootstrap";
+import CartWidget from '../CarWidget/CartWidget';
+import SearchButton from '../SearchButton/SearchButton';
 
 //Styles
 import './NavBar.scss';
+
 
 function NavBar(){
   const [click, setClick] = useState('')
@@ -29,25 +31,22 @@ function NavBar(){
                 <SearchButton />
                 <ul className="nav__menuHamburgerNav">
                   <li className="nav__menuHamburger--item">
-                    <Nav.Link href="#home"  className="nav-link" aria-current="page" onClick={ () => showHamburger () }>Home</Nav.Link>
+                  <NavLink to="/"  className="nav-link" aria-current="page" onClick={ () => showHamburger () }>Home</NavLink>
                   </li>
                   <li className="nav__menuHamburger--item">
-                    <Nav.Link href="#action/3.1" className="nav-link" onClick={ () => showHamburger () }>Ropa de hombre</Nav.Link>
+                  <NavLink to="category/men's%20clothing"  className="nav-link" onClick={ () => showHamburger () }>Ropa de hombre</NavLink>
                   </li>
                   <li className="nav__menuHamburger--item">
-                    <Nav.Link href="#action/3.2" className="nav-link" onClick={ () => showHamburger () }>Ropa de mujer</Nav.Link>
+                  <NavLink to="category/women's%20clothing" className="nav-link" onClick={ () => showHamburger () }>Ropa de mujer</NavLink>
                   </li>
                   <li className="nav__menuHamburger--item">
-                    <Nav.Link href="#action/3.3" className="nav-link" onClick={ () => showHamburger () }>Joyeria</Nav.Link>
+                  <NavLink to='category/jewelery' className="nav-link" onClick={ () => showHamburger () }>Joyeria</NavLink>
                   </li>
                   <li className="nav__menuHamburger--item">
-                    <Nav.Link href="#link" className="nav-link" onClick={ () => showHamburger () }>Tv</Nav.Link>
+                  <NavLink to='category/electronics' className="nav-link" onClick={ () => showHamburger () }>Electronica</NavLink>
                   </li>
                   <li className="nav__menuHamburger--item">
-                    <Nav.Link href="#link" className="nav-link" onClick={ () => showHamburger () }>Informatica</Nav.Link>
-                  </li>
-                  <li className="nav__menuHamburger--item">
-                    <Nav.Link href="#link" className="nav-link" onClick={ () => showHamburger () }>GitHub</Nav.Link>
+                  <NavLink to='https://github.com/pbasualdoarcati/tienda-web-basualdo-arcati' className="nav-link" onClick={ () => showHamburger () }>GitHub</NavLink>
                   </li>
                 </ul>
               </div>
@@ -57,14 +56,11 @@ function NavBar(){
 
               <Navbar.Collapse id="menuCollapse" className="navLinks">
                 <Nav className="navElement">
-                  <Nav.Link href="#home">Home</Nav.Link>
-                  <Nav.Link href="#action/3.1">Ropa de hombre</Nav.Link>
-                  <Nav.Link href="#action/3.2">Ropa de mujer</Nav.Link>
-                  <Nav.Link href="#action/3.3">Joyeria</Nav.Link>
-                  <NavDropdown title="Más" id="basic-nav-dropdown">
-                    <NavDropdown.Item href="#action/3.4">Tv</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.5">Informatica</NavDropdown.Item>
-                  </NavDropdown>
+                  <NavLink activeClassName="active" to='/' className="link">Home</NavLink>
+                  <NavLink activeClassName="active" to="category/men's%20clothing"  className="link">Ropa de hombre</NavLink>
+                  <NavLink activeClassName="active" to="category/women's%20clothing" className="link">Ropa de mujer</NavLink>
+                  <NavLink activeClassName="active" to='category/jewelery' className="link">Joyeria</NavLink>
+                  <NavLink activeClassName="active" to='category/electronics' className="link">Electronica</NavLink>
                   <CartWidget cantItem ='Cantidad de items'/>
                   <SearchButton />
                 </Nav>

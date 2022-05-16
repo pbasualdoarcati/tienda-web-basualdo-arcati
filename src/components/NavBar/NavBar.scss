@@ -18,6 +18,17 @@ img{
                     display: none;
                     visibility: hidden;
             }
+            .link{
+                text-decoration: none;
+                color: #868A8A;
+                margin-top: 10px;
+            }
+            .active{
+                background-color:#868A8A;
+                color: #000;
+                padding: 10px;
+                border-radius: 15px;
+            }
         }
     }
     .nav__menuHamburger  {
@@ -47,6 +58,7 @@ img{
         
                 .nav-link {
                     color: #000;
+                    text-decoration: none;
                 }
                 .nav-link:hover {
                     color: rgb(177, 43, 43);

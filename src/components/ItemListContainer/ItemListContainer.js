@@ -1,6 +1,8 @@
 //Components
 import { Card } from 'react-bootstrap';
 import ItemList from '../ItemList/ItemList';
+import ScrollButton from '../ScrollButton/ScrollButton';
+import Footer from '../Footer/Footer';
 
 //Styles
 import './ItemListContainer.scss'
@@ -15,6 +17,9 @@ function ItemListContainer (){
                 <ItemList />
             </Card.Body>
         </Card>
+
+        <ScrollButton />
+        <Footer />
         </>
     )
 }
