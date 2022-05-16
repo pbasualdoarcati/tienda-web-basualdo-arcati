@@ -33,7 +33,7 @@ if (counterItem >= stock){
   return (
     <>
     <div>
-        <p> Total store: {stock - counterItem}</p>
+        <p> Cantidades disponibles: {stock - counterItem}</p>
         <div>
             <Button variant="primary" disabled={disableButtonRest} className='itemButton' onClick={() => handlerClick(-1)}> - </Button>
              
