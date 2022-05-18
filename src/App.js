@@ -1,25 +1,26 @@
-import './App.scss';
-import NavBar from './components/NavBar/NavBar';
-import ItemListContainer from './components/ItemListContainer/ItemListContainer'
-import {BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+//Elements and modules
 
-// Views
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
-import Category from './Views/Category';
+//Components
 
+import NavBar from "./components/NavBar/NavBar";
+import ItemListContainer from "./components/ItemListContainer/ItemListContainer";
+import ItemDetailContainer from "./components/ItemDetailContainer/ItemDetailContainer";
 
+//Style
+
+import "./App.scss";
 
 function App() {
   return (
     <div className="App">
       <Router>
-      
-        <NavBar/>
+        <NavBar />
         <Routes>
-          <Route path='/' element={ <ItemListContainer />  }/>
-          <Route path='/item/:id' element={ <ItemDetailContainer />  }/>
-          <Route path="category/:category" element={ <Category /> }/>
+          <Route path="/" element={<ItemListContainer />} />
+          <Route path="category/:categoryID" element={<ItemListContainer />} />
+          <Route path="/item/:id" element={<ItemDetailContainer />} />
         </Routes>
       </Router>
     </div>
