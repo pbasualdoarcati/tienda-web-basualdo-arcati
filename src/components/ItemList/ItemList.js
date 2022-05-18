@@ -1,52 +1,34 @@
+//Elements and modules
+
+import React from "react";
+
 // Components
-import React from 'react';
-import Item from '../Item/Item';
-import axios from "axios";
-import { useEffect, useState } from 'react';
-import swal from 'sweetalert';
-import {Spinner} from 'react-bootstrap'
 
+import Item from "../Item/Item";
+import Spinner from "../Spinner/Spinner";
 
-function ItemList() {
-
-    const [items, setItems] = useState([])
-    const [loading, setLoading] = useState(true)
-
-    useEffect( () =>{
-        const endPoint = 'https://fakestoreapi.com/products'
-        axios.get(endPoint)
-
-        .then( resp =>{
-            const apiData = resp.data
-            setItems(apiData)
-        })
-        .catch( err =>{
-            swal({
-                title: "Hubo errores, intente nuevamente mas tarde",
-                icon: 'warning',
-            })
-        })
-        .finally(()=>{
-            setLoading(false)
-        })
-    }, [setItems])
-
-    
+function ItemList({ items, loading }) {
   return (
     <>
-    {
-        loading ? (
-            <>
-            <div className='d-flex'>
-            <h2 className="visually">Cargando por favor espere...</h2><Spinner animation="border" role="status" />
-            </div>
-            </>
-            ) : (<Item item={items}/>)
-            
-    }
-      
+      {loading ? (
+        <Spinner />
+      ) : (
+        items.map((oneItem) => {
+          return (
+            <Item
+              key={oneItem.id}
+              oneItemId={oneItem.id}
+              oneItemImage={oneItem.image}
+              oneItemTitle={oneItem.title}
+              oneItemDescription={oneItem.description}
+              oneItemRatingCount={oneItem.rating.count}
+              oneItemPrice={oneItem.price}
+            />
+          );
+        })
+      )}
     </>
-  )
+  );
 }
 
-export default ItemList
+export default ItemList;

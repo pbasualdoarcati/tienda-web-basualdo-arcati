@@ -1,69 +1,79 @@
+//Elements and modules
+
+import React, { useEffect, useState } from "react";
+import { Card } from "react-bootstrap";
+import axios from "axios";
+import swal from "sweetalert";
+import { useParams } from "react-router-dom";
+
 //Components
-import React, { useEffect, useState } from 'react'
-import ItemDetail from '../ItemDetail/ItemDetail'
-import { Card } from 'react-bootstrap';
-import axios from 'axios'
-import swal from 'sweetalert'
-import ScrollButton from '../ScrollButton/ScrollButton';
-import Footer from '../Footer/Footer';
-import { useParams } from 'react-router-dom';
+
+import ItemDetail from "../ItemDetail/ItemDetail";
+import ScrollButton from "../ScrollButton/ScrollButton";
+import Footer from "../Footer/Footer";
+
+//Style
+
+import './ItemDetailContainer.scss'
 
 function ItemDetailContainer() {
-    let itemParams = useParams()  //Capturamos el id de nuetro producto pero nos devuelve un objeto que debemos seleccionar solo el numero
-    let itemID = itemParams.id                     
+  let itemParams = useParams(); //Capturamos el id de nuetro producto pero nos devuelve un objeto que debemos seleccionar solo el numero
+  let itemID = itemParams.id;
 
-    const [itemDetail, setItemDetail] = useState(null)
-    const [loading, setLoading] = useState(true)
+  const [itemDetail, setItemDetail] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-
-    useEffect( () =>{
-        function getItem(){
-            
-        const endPoint = `https://fakestoreapi.com/products/${itemID}`
-        axios.get(endPoint)
-        .then( resp =>{
-            const apiData = resp.data
-            setItemDetail(apiData)
-            
+  useEffect(() => {
+    function getItem() {
+      const endPoint = `https://fakestoreapi.com/products/${itemID}`;
+      axios
+        .get(endPoint)
+        .then((resp) => {
+          const apiData = resp.data;
+          setItemDetail(apiData);
         })
-        .catch( err =>{
-            swal({
-                title: "Hubo errores, intente nuevamente más tarde",
-                icon: 'warning',
-            })
+        .catch((err) => {
+          swal({
+            title: "Hubo errores, intente nuevamente más tarde",
+            icon: "warning",
+          });
         })
-        .finally(()=>{
-            setLoading(false)
-        })
+        .finally(() => {
+          setLoading(true);
+        });
     }
 
-    getItem()
-}, []) 
+    setTimeout(() => {
+      setLoading(false)
+    }, 2000)
 
-let initial = 0
+    getItem();
 
-const onAdd = (cantidad)=>{
-  console.log(`Cantidad de items en el carrito: ` + cantidad);
-}
+  }, [itemID]);
+
+  let initial = 0;
+
+  const onAdd = (cantidad) => {
+    console.log(`Cantidad de items en el carrito: ` + cantidad);
+  };
 
   return (
     <>
-        <Card className='cardContainer'>
-            <Card.Body>
-             <ItemDetail 
-                 loading={loading}
-                 itemDetail={itemDetail}
-                 initial = {initial}
-                 onAdd={onAdd}
-             />
-            </Card.Body>
+      <Card className="cardContainer">
+        <Card.Body className='itemDetailContainer'>
+          <ItemDetail
+            loading={loading}
+            itemDetail={itemDetail}
+            initial={initial}
+            onAdd={onAdd}
+          />
+        </Card.Body>
+      </Card>
 
-        </Card> 
-
-        <ScrollButton />
-        <Footer />  
+      <ScrollButton />
+      <Footer />
     </>
-  )
+  );
 }
 
-export default ItemDetailContainer
+export default ItemDetailContainer;

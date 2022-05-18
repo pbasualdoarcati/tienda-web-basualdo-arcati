@@ -1,19 +1,25 @@
-.item{
-    width: 100%;
-    border-radius: 20%;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    .imgItem{
-        width: 150px;
-        margin: auto;
-    }
-}
-.linkButton{
+.itemDecoration{
     text-decoration: none;
-    border: 1px solid #ffe083;
-    background-color: #ffe083;
-    padding: 8px;
-    margin: 10px;
-    border-radius: 1rem;
     color: #000;
+    
+    .item{
+        width: 100%;
+        border-radius: 20%;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        .imgItem{
+            width: 150px;
+            margin: auto;
+        }
+    }
+    .linkButton{
+        text-decoration: none;
+        border: 1px solid #ffe083;
+        background-color: #ffe083;
+        padding: 8px;
+        margin: 10px;
+        border-radius: 1rem;
+        color: #000;
+    }
+    
 }

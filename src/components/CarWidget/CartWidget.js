@@ -1,4 +1,5 @@
-//Components
+////Elements and modules
+
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';

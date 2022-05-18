@@ -1,42 +1,50 @@
-// Components
-import React from 'react'
-import { Card } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+//Elements and modules
 
+import React from "react";
+import { Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 //Styles
 
-import './Item.scss'
+import "./Item.scss";
 
-function Item({item}) {
-
+function Item({
+  oneItemId,
+  oneItemImage,
+  oneItemTitle,
+  oneItemDescription,
+  oneItemRatingCount,
+  oneItemPrice,
+}) {
   return (
     <>
-        {
-          item.map((oneItem)=>{
-              return ( 
-              <div key={oneItem.id}>
-                <Card className='item'>
-                    <Card.Img variant="top" src={oneItem.image} className='imgItem img-fluid' />
-                    <Card.Body>
-                      <Card.Title>{oneItem.title.substring(0, 20)}...</Card.Title>
-                      <Card.Text>
-                        {oneItem.description.substring(0, 30)}...
-                      </Card.Text>
-                      <Card.Text>
-                        Cantidad en stock: {oneItem.rating.count}
-                        <br />
-                        Precio: {oneItem.price}
-                      </Card.Text>
-                        <Link to={`/item/${oneItem.id}`} className='linkButton'>Ver detalles</Link>
-                    </Card.Body>
-                </Card>
-              </div>
-                )
-          })  
-        }
+      <Link
+        to={`/item/${oneItemId}`}
+        key={oneItemId}
+        className="itemDecoration"
+      >
+        <div>
+          <Card className="item">
+            <Card.Img
+              variant="top"
+              src={oneItemImage}
+              className="imgItem img-fluid"
+            />
+            <Card.Body>
+              <Card.Title>{oneItemTitle.substring(0, 20)}...</Card.Title>
+              <Card.Text>{oneItemDescription.substring(0, 30)}...</Card.Text>
+              <Card.Text>
+                Cantidad en stock: {oneItemRatingCount}
+                <br />
+                Precio: {oneItemPrice}
+              </Card.Text>
+              <p className="linkButton">Ver detalles</p>
+            </Card.Body>
+          </Card>
+        </div>
+      </Link>
     </>
-  )
+  );
 }
 
-export default Item
+export default Item;
