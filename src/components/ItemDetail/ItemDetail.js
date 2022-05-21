@@ -1,7 +1,8 @@
 ////Elements and modules
 
-import React from "react";
-
+import React, { useState } from "react";
+import { Modal, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 //Components
 
@@ -12,7 +13,16 @@ import Spinner from "../Spinner/Spinner";
 
 import "./ItemDetail.scss";
 
-function ItemDetail({ loading, itemDetail, onAdd, initial }) {
+function ItemDetail({ loading, itemDetail, initial }) {
+  const [quantity, setQuantity] = useState(0);
+
+  const onAdd = (quantity) => {
+    setQuantity(quantity);
+  };
+
+
+
+
   return (
     <>
       {loading ? (
@@ -30,7 +40,7 @@ function ItemDetail({ loading, itemDetail, onAdd, initial }) {
                 />
               </div>
               <div className="col-md-8">
-                <div className="card-body">
+                <div className="card-body" id={itemDetail.id}>
                   <h3>Descripción:</h3>
                   <p className="card-text">{itemDetail.description}</p>
                   <h4>Cantidad de items en stock:</h4>
@@ -38,11 +48,33 @@ function ItemDetail({ loading, itemDetail, onAdd, initial }) {
                   <h4>Precio total por unidad:</h4>
                   <p className="card-text">{itemDetail.price}</p>
 
-                  <ItemCount
-                    initial={initial}
-                    onAdd={onAdd}
-                    stock={itemDetail.rating.count}
-                  />
+                  {quantity === 0 ? (
+                    <ItemCount
+                      initial={initial}
+                      onAdd={onAdd}
+                      stock={itemDetail.rating.count}
+                    />
+                  ) : (
+                    <>
+                      <Modal.Dialog>
+                        <Modal.Body>
+                          <p>
+                            Se agregaron {quantity} {itemDetail.title} al
+                            carrito{" "}
+                          </p>
+                        </Modal.Body>
+
+                        <Modal.Footer>
+                          <sub>Gracias por su compra</sub>
+                        </Modal.Footer>
+                      </Modal.Dialog>
+                      <Button variant="success" className="itemButton">
+                        <Link to="/cart" className="linkButton">
+                          Finalizar mi compra
+                        </Link>
+                      </Button>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

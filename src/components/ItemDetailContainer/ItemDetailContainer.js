@@ -14,7 +14,7 @@ import Footer from "../Footer/Footer";
 
 //Style
 
-import './ItemDetailContainer.scss'
+import "./ItemDetailContainer.scss";
 
 function ItemDetailContainer() {
   let itemParams = useParams(); //Capturamos el id de nuetro producto pero nos devuelve un objeto que debemos seleccionar solo el numero
@@ -44,28 +44,22 @@ function ItemDetailContainer() {
     }
 
     setTimeout(() => {
-      setLoading(false)
-    }, 2000)
+      setLoading(false);
+    }, 2000);
 
     getItem();
-
   }, [itemID]);
 
   let initial = 0;
 
-  const onAdd = (cantidad) => {
-    console.log(`Cantidad de items en el carrito: ` + cantidad);
-  };
-
   return (
     <>
       <Card className="cardContainer">
-        <Card.Body className='itemDetailContainer'>
+        <Card.Body className="itemDetailContainer">
           <ItemDetail
             loading={loading}
             itemDetail={itemDetail}
             initial={initial}
-            onAdd={onAdd}
           />
         </Card.Body>
       </Card>
