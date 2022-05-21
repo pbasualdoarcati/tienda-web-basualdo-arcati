@@ -38,7 +38,6 @@ function ItemListContainer() {
       .get(endPoint)
 
       .then((resp) => {
-
         const apiData = resp.data;
         setItems(apiData);
       })
@@ -52,9 +51,8 @@ function ItemListContainer() {
         setLoading(true);
       });
     setTimeout(() => {
-      setLoading(false)
-    }, 2000)
-    
+      setLoading(false);
+    }, 2000);
   }, [endPoint]);
 
   return (
