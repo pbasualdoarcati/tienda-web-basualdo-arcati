@@ -29,6 +29,13 @@ function ItemCount({ stock, initial, onAdd }) {
     disableButton = true;
   }
 
+  const idProduct = (e) => {
+    let parentDiv = e.target.parentNode
+    let parentProduct = parentDiv.parentNode
+    parentProductId = parentProduct.id
+  }
+  let parentProductId
+
   return (
     <>
       <div>
@@ -60,7 +67,9 @@ function ItemCount({ stock, initial, onAdd }) {
           variant="success"
           disabled={disableButtonRest}
           className="itemButton"
-          onClick={() => onAdd(counterItem)}
+          // onClick={idProduct}
+          onFocus={idProduct}
+          onClick={() => onAdd(counterItem, parentProductId)}
         >
           Agregar al Carrito
         </Button>

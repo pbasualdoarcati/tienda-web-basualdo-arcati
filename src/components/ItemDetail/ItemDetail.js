@@ -1,8 +1,11 @@
 ////Elements and modules
 
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
+import { CartContext } from "../../context/CartContext";
 import { Modal, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+
 
 //Components
 
@@ -14,14 +17,30 @@ import Spinner from "../Spinner/Spinner";
 import "./ItemDetail.scss";
 
 function ItemDetail({ loading, itemDetail, initial }) {
+
+  const { setProduct } = useContext(CartContext)
+
   const [quantity, setQuantity] = useState(0);
+  // const [product, setProduct] = useState([])
 
-  const onAdd = (quantity) => {
+  const [itemID, setItemID] = useState()
+
+  
+  const onAdd = (quantity, itemID) => {
     setQuantity(quantity);
+    setItemID(itemID)
+
   };
-
-
-
+  
+  const endPoint = `https://fakestoreapi.com/products/${itemID}`;
+  useEffect(() => {
+    axios
+      .get(endPoint)
+      .then((resp) => {
+        let data = resp.data
+        setProduct(data)
+      })
+  }, [endPoint, setProduct])
 
   return (
     <>
