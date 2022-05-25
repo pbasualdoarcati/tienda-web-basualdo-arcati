@@ -2,8 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
-import axios from "axios";
-import swal from "sweetalert";
 import { useParams } from "react-router-dom";
 
 //Components
@@ -11,6 +9,7 @@ import { useParams } from "react-router-dom";
 import ItemDetail from "../ItemDetail/ItemDetail";
 import ScrollButton from "../ScrollButton/ScrollButton";
 import Footer from "../Footer/Footer";
+import listado from '../Listado/Listado'
 
 //Style
 
@@ -18,37 +17,25 @@ import "./ItemDetailContainer.scss";
 
 function ItemDetailContainer() {
   let itemParams = useParams(); //Capturamos el id de nuetro producto pero nos devuelve un objeto que debemos seleccionar solo el numero
-  let itemID = itemParams.id;
+  let itemID = Number(itemParams.id);
 
   const [itemDetail, setItemDetail] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    function getItem() {
-      const endPoint = `https://fakestoreapi.com/products/${itemID}`;
-      axios
-        .get(endPoint)
-        .then((resp) => {
-          const apiData = resp.data;
-          setItemDetail(apiData);
-        })
-        .catch((err) => {
-          swal({
-            title: "Hubo errores, intente nuevamente más tarde",
-            icon: "warning",
-          });
-        })
-        .finally(() => {
-          setLoading(true);
-        });
-    }
-
+  const getListado = new Promise((resolve, reject) => {
     setTimeout(() => {
-      setLoading(false);
-    }, 2000);
+      resolve(listado)
+    }, 1000)
+  })
 
-    getItem();
-  }, [itemID]);
+  useEffect(() => {
+    getListado.then(data => {
+      let datos = data
+      setItemDetail(datos.find(el => el.id === itemID))
+      setLoading(false)
+    })
+  }, [itemID])
+  
 
   let initial = 0;
 

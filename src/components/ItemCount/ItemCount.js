@@ -7,7 +7,7 @@ import { Button } from "react-bootstrap";
 
 import "./ItemCount.scss";
 
-function ItemCount({ stock, initial, onAdd }) {
+function ItemCount({ stock, initial, onAdd, itemId }) {
   let disableButtonRest = false;
   let disableButton = false;
 
@@ -29,12 +29,6 @@ function ItemCount({ stock, initial, onAdd }) {
     disableButton = true;
   }
 
-  const idProduct = (e) => {
-    let parentDiv = e.target.parentNode
-    let parentProduct = parentDiv.parentNode
-    parentProductId = parentProduct.id
-  }
-  let parentProductId
 
   return (
     <>
@@ -67,9 +61,7 @@ function ItemCount({ stock, initial, onAdd }) {
           variant="success"
           disabled={disableButtonRest}
           className="itemButton"
-          // onClick={idProduct}
-          onFocus={idProduct}
-          onClick={() => onAdd(counterItem, parentProductId)}
+          onClick={() => onAdd(counterItem, itemId)}
         >
           Agregar al Carrito
         </Button>

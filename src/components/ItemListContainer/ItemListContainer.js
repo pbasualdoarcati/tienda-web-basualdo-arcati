@@ -1,7 +1,5 @@
 //Elements and modules
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import swal from "sweetalert";
 import { Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
@@ -10,6 +8,7 @@ import { useParams } from "react-router-dom";
 import ItemList from "../ItemList/ItemList";
 import ScrollButton from "../ScrollButton/ScrollButton";
 import Footer from "../Footer/Footer";
+import listado from '../Listado/Listado'
 
 //Styles
 
@@ -19,41 +18,42 @@ function ItemListContainer() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  let endPoint;
+  // let endPoint;
 
   //Capturamos lo que esta en la url
 
   let category = useParams();
   let clothing = category.categoryID;
 
-  if (clothing === undefined) {
-    //Si clothing es true significa que estoy en home
-    endPoint = `https://fakestoreapi.com/products/`;
-  } else {
-    endPoint = `https://fakestoreapi.com/products/category/${clothing}`;
-  }
 
-  useEffect(() => {
-    axios
-      .get(endPoint)
 
-      .then((resp) => {
-        const apiData = resp.data;
-        setItems(apiData);
-      })
-      .catch((err) => {
-        swal({
-          title: "Hubo errores, intente nuevamente mas tarde",
-          icon: "warning",
-        });
-      })
-      .finally(() => {
-        setLoading(true);
-      });
+  const getListado = new Promise((resolve, reject) => {
     setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }, [endPoint]);
+      resolve(listado)
+    }, 1000)
+  })
+  
+  useEffect(() => {
+    setLoading(true)
+    getListado.then(resp => {
+      let datos = resp
+      setItems(datos)
+
+      if (category.categoryID === undefined) {
+        setItems(datos)
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
+      } else {
+        setItems( datos.filter(elem => elem.category === clothing))
+        
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
+      }  
+    })
+  }, [clothing])
+
 
   return (
     <>
