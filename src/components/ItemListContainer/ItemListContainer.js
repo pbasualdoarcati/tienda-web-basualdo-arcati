@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import swal from "sweetalert";
 
 //Components
 
@@ -51,6 +52,12 @@ function ItemListContainer() {
           setLoading(false);
         }, 1000);
       }  
+    })
+      .catch( err => {
+        swal({
+          title: 'Hubo errores, pruebe nuevamente más tarde',
+          icon: 'warning'
+      })
     })
   }, [clothing])
 
