@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-
+import swal from "sweetalert";
 //Components
 
 import ItemDetail from "../ItemDetail/ItemDetail";
@@ -34,6 +34,12 @@ function ItemDetailContainer() {
       setItemDetail(datos.find(el => el.id === itemID))
       setLoading(false)
     })
+      .catch(err => {
+        swal({
+          title: 'Hubo errores, pruebe nuevamente más tarde',
+          icon: 'warning'
+        })
+      })
   }, [itemID])
   
 
