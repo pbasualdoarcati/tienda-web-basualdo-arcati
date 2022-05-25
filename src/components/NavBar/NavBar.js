@@ -63,7 +63,7 @@ function NavBar() {
           </li>
           <li className="nav__menuHamburger--item">
             <NavLink
-              to="category/men's%20clothing"
+              to="category/men"
               className="nav-link"
               onClick={() => showHamburger()}
             >
@@ -72,7 +72,7 @@ function NavBar() {
           </li>
           <li className="nav__menuHamburger--item">
             <NavLink
-              to="category/women's%20clothing"
+              to="category/women"
               className="nav-link"
               onClick={() => showHamburger()}
             >
@@ -130,7 +130,7 @@ function NavBar() {
             className={({ isActive }) =>
               isActive ? activeClassName : defaultClassName
             }
-            to="category/men's%20clothing"
+            to="category/men"
           >
             Ropa de hombre
           </NavLink>
@@ -138,7 +138,7 @@ function NavBar() {
             className={({ isActive }) =>
               isActive ? activeClassName : defaultClassName
             }
-            to="category/women's%20clothing"
+            to="category/women"
           >
             Ropa de mujer
           </NavLink>

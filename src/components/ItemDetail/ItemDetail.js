@@ -1,11 +1,9 @@
 ////Elements and modules
 
-import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { CartContext } from "../../context/CartContext";
 import { Modal, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
 
 //Components
 
@@ -17,30 +15,18 @@ import Spinner from "../Spinner/Spinner";
 import "./ItemDetail.scss";
 
 function ItemDetail({ loading, itemDetail, initial }) {
-
-  const { setProduct } = useContext(CartContext)
+  const { addItem } = useContext(CartContext);
 
   const [quantity, setQuantity] = useState(0);
-  // const [product, setProduct] = useState([])
 
-  const [itemID, setItemID] = useState()
+  const [itemID, setItemID] = useState();
 
-  
   const onAdd = (quantity, itemID) => {
     setQuantity(quantity);
-    setItemID(itemID)
-
+    setItemID(itemID);
+    addItem(itemDetail, quantity)
   };
-  
-  const endPoint = `https://fakestoreapi.com/products/${itemID}`;
-  useEffect(() => {
-    axios
-      .get(endPoint)
-      .then((resp) => {
-        let data = resp.data
-        setProduct(data)
-      })
-  }, [endPoint, setProduct])
+
 
   return (
     <>
@@ -59,7 +45,7 @@ function ItemDetail({ loading, itemDetail, initial }) {
                 />
               </div>
               <div className="col-md-8">
-                <div className="card-body" id={itemDetail.id}>
+                <div className="card-body">
                   <h3>Descripción:</h3>
                   <p className="card-text">{itemDetail.description}</p>
                   <h4>Cantidad de items en stock:</h4>
@@ -70,6 +56,7 @@ function ItemDetail({ loading, itemDetail, initial }) {
                   {quantity === 0 ? (
                     <ItemCount
                       initial={initial}
+                      itemId={itemDetail.id}
                       onAdd={onAdd}
                       stock={itemDetail.rating.count}
                     />
@@ -82,10 +69,6 @@ function ItemDetail({ loading, itemDetail, initial }) {
                             carrito{" "}
                           </p>
                         </Modal.Body>
-
-                        <Modal.Footer>
-                          <sub>Gracias por su compra</sub>
-                        </Modal.Footer>
                       </Modal.Dialog>
                       <Button variant="success" className="itemButton">
                         <Link to="/cart" className="linkButton">
