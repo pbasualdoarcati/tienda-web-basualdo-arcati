@@ -1,19 +1,22 @@
 //Elements and modules
 
 import { Link, NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Button, Nav, Navbar } from "react-bootstrap";
-import CartWidget from "../CarWidget/CartWidget";
+import CartWidget from "../CartWidget/CartWidget";
 
 //Components
 
 import SearchButton from "../SearchButton/SearchButton";
+import { CartContext } from "../../context/CartContext";
 
 //Styles
 
 import "./NavBar.scss";
 
 function NavBar() {
+  const { product } = useContext(CartContext);
+
   const [click, setClick] = useState("");
 
   const showHamburger = () => {
@@ -50,7 +53,14 @@ function NavBar() {
           X
         </Button>
         <SearchButton />
+        
         <ul className="nav__menuHamburgerNav">
+          <li className="nav__menuHamburger--item">
+            <Link to="/Cart"
+              onClick={() => showHamburger()}>
+              {product.length > 0 && <CartWidget cantItem={product.length} />}
+            </Link>
+          </li>
           <li className="nav__menuHamburger--item">
             <NavLink
               to="/"
@@ -158,7 +168,9 @@ function NavBar() {
           >
             Electronica
           </NavLink>
-          <CartWidget cantItem="Cantidad de items" />
+          <Link to="/Cart">
+            {product.length > 0 && <CartWidget cantItem={product.length} />}
+          </Link>
           <SearchButton />
         </Nav>
       </Navbar.Collapse>

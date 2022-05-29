@@ -29,6 +29,7 @@ function Item({
               variant="top"
               src={oneItemImage}
               className="imgItem img-fluid"
+              alt={oneItemTitle}
             />
             <Card.Body>
               <Card.Title>{oneItemTitle.substring(0, 20)}...</Card.Title>

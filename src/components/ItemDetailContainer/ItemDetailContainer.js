@@ -9,7 +9,7 @@ import swal from "sweetalert";
 import ItemDetail from "../ItemDetail/ItemDetail";
 import ScrollButton from "../ScrollButton/ScrollButton";
 import Footer from "../Footer/Footer";
-import listado from '../Listado/Listado'
+import listado from "../Listado/Listado";
 
 //Style
 
@@ -24,24 +24,24 @@ function ItemDetailContainer() {
 
   const getListado = new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve(listado)
-    }, 1000)
-  })
+      resolve(listado);
+    }, 1000);
+  });
 
   useEffect(() => {
-    getListado.then(data => {
-      let datos = data
-      setItemDetail(datos.find(el => el.id === itemID))
-      setLoading(false)
-    })
-      .catch(err => {
-        swal({
-          title: 'Hubo errores, pruebe nuevamente más tarde',
-          icon: 'warning'
-        })
+    getListado
+      .then((data) => {
+        let datos = data;
+        setItemDetail(datos.find((el) => el.id === itemID));
+        setLoading(false);
       })
-  }, [itemID])
-  
+      .catch((err) => {
+        swal({
+          title: "Hubo errores, pruebe nuevamente más tarde",
+          icon: "warning",
+        });
+      });
+  }, [itemID]);
 
   let initial = 0;
 
