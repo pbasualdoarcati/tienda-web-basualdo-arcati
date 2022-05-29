@@ -15,7 +15,7 @@ import Spinner from "../Spinner/Spinner";
 import "./ItemDetail.scss";
 
 function ItemDetail({ loading, itemDetail, initial }) {
-  const { addItem } = useContext(CartContext);
+  const { addItem, isInCart } = useContext(CartContext);
 
   const [quantity, setQuantity] = useState(0);
 
@@ -24,9 +24,8 @@ function ItemDetail({ loading, itemDetail, initial }) {
   const onAdd = (quantity, itemID) => {
     setQuantity(quantity);
     setItemID(itemID);
-    addItem(itemDetail, quantity)
+    addItem(itemDetail, quantity);
   };
-
 
   return (
     <>
@@ -40,7 +39,7 @@ function ItemDetail({ loading, itemDetail, initial }) {
               <div className="col-md-4">
                 <img
                   src={itemDetail.image}
-                  alt="Imagen del producto"
+                    alt={itemDetail.title}
                   className="imagenItem"
                 />
               </div>
@@ -53,7 +52,7 @@ function ItemDetail({ loading, itemDetail, initial }) {
                   <h4>Precio total por unidad:</h4>
                   <p className="card-text">{itemDetail.price}</p>
 
-                  {quantity === 0 ? (
+                    {!(isInCart(itemDetail.id)) ? (
                     <ItemCount
                       initial={initial}
                       itemId={itemDetail.id}
@@ -65,7 +64,7 @@ function ItemDetail({ loading, itemDetail, initial }) {
                       <Modal.Dialog>
                         <Modal.Body>
                           <p>
-                            Se agregaron {quantity} {itemDetail.title} al
+                            Se agregó {itemDetail.title} al
                             carrito{" "}
                           </p>
                         </Modal.Body>
