@@ -3,7 +3,7 @@
 import { Link, NavLink } from "react-router-dom";
 import { useState, useContext } from "react";
 import { Button, Nav, Navbar } from "react-bootstrap";
-import CartWidget from "../CarWidget/CartWidget";
+import CartWidget from "../CartWidget/CartWidget";
 
 //Components
 
