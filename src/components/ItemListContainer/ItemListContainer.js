@@ -1,15 +1,16 @@
 //Elements and modules
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import swal from "sweetalert";
+import { collection, query, getDocs } from "firebase/firestore";
 
 //Components
 
 import ItemList from "../ItemList/ItemList";
 import ScrollButton from "../ScrollButton/ScrollButton";
 import Footer from "../Footer/Footer";
-import listado from "../Listado/Listado";
+import { CartContext } from "../../context/CartContext";
+import { db } from "../../firebase/firebaseConfig";
 
 //Styles
 
@@ -18,46 +19,35 @@ import "./ItemListContainer.scss";
 function ItemListContainer() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  // let endPoint;
-
-  //Capturamos lo que esta en la url
+  const { setAllItem } = useContext(CartContext);
 
   let category = useParams();
   let clothing = category.categoryID;
 
-  const getListado = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(listado);
-    }, 1000);
-  });
-
   useEffect(() => {
-    setLoading(true);
-    getListado
-      .then((resp) => {
-        let datos = resp;
-        setItems(datos);
-
-        if (category.categoryID === undefined) {
-          setItems(datos);
-          setTimeout(() => {
-            setLoading(false);
-          }, 1000);
-        } else {
-          setItems(datos.filter((elem) => elem.category === clothing));
-
-          setTimeout(() => {
-            setLoading(false);
-          }, 1000);
-        }
-      })
-      .catch((err) => {
-        swal({
-          title: "Hubo errores, pruebe nuevamente más tarde",
-          icon: "warning",
-        });
+    const getItem = async () => {
+      const q = query(collection(db, "Items"));
+      const docs = [];
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        docs.push({ ...doc.data(), id: doc.id });
       });
+      setItems(docs);
+      setAllItem(docs);
+      if (category.categoryID === undefined) {
+        setItems(docs);
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
+      } else {
+        setItems(docs.filter((elem) => elem.category === clothing));
+
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
+      }
+    };
+    getItem();
   }, [clothing]);
 
   return (

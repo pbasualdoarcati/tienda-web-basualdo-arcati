@@ -21,7 +21,7 @@ function ItemList({ items, loading }) {
               oneItemImage={oneItem.image}
               oneItemTitle={oneItem.title}
               oneItemDescription={oneItem.description}
-              oneItemRatingCount={oneItem.rating.count}
+              oneItemRatingCount={oneItem.stock}
               oneItemPrice={oneItem.price}
             />
           );

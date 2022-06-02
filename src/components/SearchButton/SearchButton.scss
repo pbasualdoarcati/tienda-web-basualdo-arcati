@@ -1,15 +1,32 @@
-.buttonSearch{
+.styleForm {
+  display: flex;
+  .inputSearch {
     width: 150px;
+    height: 76%;
+    border-radius: 25px;
+  }
+  .buttonSearch {
+    height: 75%;
+    border-radius: 25px;
+    position: static;
+  }
 }
 
-.buttonSearch:focus-within {
-    width: 15%;
+.inputSearch:focus-within {
+  display: block;
+  width: 95%;
 }
 
-.buttonSearch:hover{
-    width: 15%;
-    transition: all 1s;
-    @media (max-width: 1024px) {
+.inputSearch:hover {
+  width: 95%;
+  @media (max-width: 1024px) {
     width: 15rem;
+  }
 }
+.Ease-In {
+  -webkit-transition: all 1s ease-in;
+  -moz-transition: all 1s ease-in;
+  -ms-transition: all 1s ease-in;
+  -o-transition: all 1s ease-in;
+  transition: all 1s ease-in;
 }

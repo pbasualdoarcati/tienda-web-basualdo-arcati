@@ -3,13 +3,14 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import swal from "sweetalert";
+import { collection, query, getDocs } from "firebase/firestore";
+
 //Components
 
 import ItemDetail from "../ItemDetail/ItemDetail";
 import ScrollButton from "../ScrollButton/ScrollButton";
 import Footer from "../Footer/Footer";
-import listado from "../Listado/Listado";
+import { db } from "../../firebase/firebaseConfig";
 
 //Style
 
@@ -17,30 +18,23 @@ import "./ItemDetailContainer.scss";
 
 function ItemDetailContainer() {
   let itemParams = useParams(); //Capturamos el id de nuetro producto pero nos devuelve un objeto que debemos seleccionar solo el numero
-  let itemID = Number(itemParams.id);
+  let itemID = itemParams.id;
 
   const [itemDetail, setItemDetail] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const getListado = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(listado);
-    }, 1000);
-  });
-
   useEffect(() => {
-    getListado
-      .then((data) => {
-        let datos = data;
-        setItemDetail(datos.find((el) => el.id === itemID));
-        setLoading(false);
-      })
-      .catch((err) => {
-        swal({
-          title: "Hubo errores, pruebe nuevamente más tarde",
-          icon: "warning",
-        });
+    const getItem = async () => {
+      const q = query(collection(db, "Items"));
+      const docs = [];
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        docs.push({ ...doc.data(), id: doc.id });
       });
+      setItemDetail(docs.find((item) => item.id === itemID));
+      setLoading(false);
+    };
+    getItem();
   }, [itemID]);
 
   let initial = 0;

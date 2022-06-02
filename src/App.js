@@ -14,6 +14,7 @@ import Cart from "./components/Cart/Cart";
 
 import "./App.scss";
 
+
 function App() {
   return (
     <CartProvider>
