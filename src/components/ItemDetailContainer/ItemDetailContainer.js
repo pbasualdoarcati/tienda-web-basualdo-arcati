@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { collection, query, getDocs } from "firebase/firestore";
+import { collection, query, getDocs, where, documentId } from "firebase/firestore";
 
 //Components
 
@@ -17,7 +17,7 @@ import { db } from "../../firebase/firebaseConfig";
 import "./ItemDetailContainer.scss";
 
 function ItemDetailContainer() {
-  let itemParams = useParams(); //Capturamos el id de nuetro producto pero nos devuelve un objeto que debemos seleccionar solo el numero
+  let itemParams = useParams(); 
   let itemID = itemParams.id;
 
   const [itemDetail, setItemDetail] = useState(null);
@@ -25,14 +25,17 @@ function ItemDetailContainer() {
 
   useEffect(() => {
     const getItem = async () => {
-      const q = query(collection(db, "Items"));
+      const q = query(collection(db, "Items"), where(documentId(), '==', itemID));
       const docs = [];
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         docs.push({ ...doc.data(), id: doc.id });
       });
-      setItemDetail(docs.find((item) => item.id === itemID));
+      setItemDetail(docs[0]);
       setLoading(false);
+      console.log(itemID)
+      console.log(docs)
+      console.log(itemDetail)
     };
     getItem();
   }, [itemID]);

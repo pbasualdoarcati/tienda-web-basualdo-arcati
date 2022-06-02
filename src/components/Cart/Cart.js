@@ -43,11 +43,10 @@ function Cart() {
             {product.map((item) => {
               return (
                 <div>
-                  <Card className="cardCart">
+                  <Card className="cardCart" key={item.id}>
                     <div>
                       <Card.Img
                         variant="left"
-                        key={item.id}
                         src={item.item.image}
                         className="imgItem"
                       />
@@ -66,6 +65,9 @@ function Cart() {
                       </Card.Text>
                       <Card.Text className="cartText">
                         Cantidades: {item.quantity}
+                      </Card.Text>
+                      <Card.Text className="cartText">
+                        Precio por unidad: ${item.item.price}
                       </Card.Text>
                     </Card.Body>
                   </Card>

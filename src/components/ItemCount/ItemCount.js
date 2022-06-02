@@ -17,14 +17,10 @@ function ItemCount({ stock, initial, onAdd, itemId }) {
     setCounterItem(counterItem + num);
   };
 
-  // Control de botones ante el stock y cantidad de items
-
-  //Si el contador inicial es 0, desactivo el boton -
   if (counterItem === 0) {
     disableButtonRest = true;
   }
 
-  //Si el contador es mayor o igual que el stock, desactivo el boton +
   if (counterItem >= stock) {
     disableButton = true;
   }
