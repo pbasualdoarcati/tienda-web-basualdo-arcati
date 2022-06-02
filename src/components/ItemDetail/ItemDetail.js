@@ -66,7 +66,20 @@ function ItemDetail({ loading, itemDetail, initial }) {
                           <p>Se agregó {itemDetail.title} al carrito </p>
                         </Modal.Body>
                       </Modal.Dialog>
+                      <Button variant="secondary" className="itemButton">
+                        <Link to="/" className="linkButton">
+                          Volver
+                        </Link>
+                      </Button>
                       <Button variant="success" className="itemButton">
+                        <Link
+                          to={`/category/${itemDetail.category}`}
+                          className="linkButton"
+                        >
+                          Seguir comprando
+                        </Link>
+                      </Button>
+                      <Button variant="danger" className="itemButton">
                         <Link to="/cart" className="linkButton">
                           Finalizar mi compra
                         </Link>
