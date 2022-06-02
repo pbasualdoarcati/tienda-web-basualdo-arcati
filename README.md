@@ -42,7 +42,7 @@ En desarollo
     
 6. Firebase:
 
-    Se utiliza Firebase y Firestone para la gestión de la base de datos y su respuesta en las peticiones asincronas.
+    Se utiliza Firebase y Firestore para la gestión de la base de datos y su respuesta en las peticiones asincronas.
 
 ## Para poder ver la aplicación desde local
 ***
