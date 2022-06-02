@@ -39,7 +39,7 @@ function ItemDetail({ loading, itemDetail, initial }) {
               <div className="col-md-4">
                 <img
                   src={itemDetail.image}
-                    alt={itemDetail.title}
+                  alt={itemDetail.title}
                   className="imagenItem"
                 />
               </div>
@@ -48,25 +48,22 @@ function ItemDetail({ loading, itemDetail, initial }) {
                   <h3>Descripción:</h3>
                   <p className="card-text">{itemDetail.description}</p>
                   <h4>Cantidad de items en stock:</h4>
-                  <p className="card-text">{itemDetail.rating.count}</p>
+                  <p className="card-text">{itemDetail.stock}</p>
                   <h4>Precio total por unidad:</h4>
                   <p className="card-text">{itemDetail.price}</p>
 
-                    {!(isInCart(itemDetail.id)) ? (
+                  {!isInCart(itemDetail.id) ? (
                     <ItemCount
                       initial={initial}
                       itemId={itemDetail.id}
                       onAdd={onAdd}
-                      stock={itemDetail.rating.count}
+                      stock={itemDetail.stock}
                     />
                   ) : (
                     <>
                       <Modal.Dialog>
                         <Modal.Body>
-                          <p>
-                            Se agregó {itemDetail.title} al
-                            carrito{" "}
-                          </p>
+                          <p>Se agregó {itemDetail.title} al carrito </p>
                         </Modal.Body>
                       </Modal.Dialog>
                       <Button variant="success" className="itemButton">

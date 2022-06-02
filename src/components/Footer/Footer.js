@@ -13,7 +13,7 @@ import "./Footer.scss";
 function Footer() {
   return (
     <footer className="footer">
-      <Navbar bg="light" variant="light" expand="lg" className="footerNav">
+      <Navbar bg="light" variant="light" expand="lg" className="footerNav" >
         <Nav className="navElement">
           <p>2022 © All rights reserved</p>
           <Link to="https://www.linkedin.com/in/pbasualdoarcati">

@@ -5,6 +5,8 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   let cartLocalStorage = JSON.parse(localStorage.getItem("cartLocal"));
 
+  const [allItem, setAllItem] = useState();
+  const [search, setSearch] = useState({});
   const [product, setProduct] = useState(
     cartLocalStorage ? cartLocalStorage : []
   );
@@ -47,14 +49,27 @@ export const CartProvider = ({ children }) => {
     return cartQuantity;
   };
   const totalPrice = () => {
-    return product.reduce(
-      (accum, element) => (accum + element.quantity * element.item.price),
-      0
-    ).toFixed(2);
+    return product
+      .reduce(
+        (accum, element) => accum + element.quantity * element.item.price,
+        0
+      )
+      .toFixed(2);
   };
 
-  const data = { clearCart, addItem, deleteItem, cartQuantity, totalPrice, product, isInCart };
-
+  const data = {
+    clearCart,
+    addItem,
+    deleteItem,
+    cartQuantity,
+    totalPrice,
+    product,
+    isInCart,
+    allItem,
+    setAllItem,
+    search,
+    setSearch,
+  };
 
   return <CartContext.Provider value={data}>{children}</CartContext.Provider>;
 };

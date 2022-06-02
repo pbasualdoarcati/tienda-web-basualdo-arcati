@@ -44,12 +44,14 @@ function Cart() {
               return (
                 <div>
                   <Card className="cardCart">
-                    <Card.Img
-                      variant="left"
-                      key={item.item.id}
-                      src={item.item.image}
-                      className="imgItem img-fluid"
-                    />
+                    <div>
+                      <Card.Img
+                        variant="left"
+                        key={item.id}
+                        src={item.item.image}
+                        className="imgItem"
+                      />
+                    </div>
                     <Card.Body>
                       <div className="btnCartDelete">
                         <Button onClick={() => deleteItem(item.item.id)}>
