@@ -39,6 +39,10 @@ En desarollo
 5. BrowserRouter, Routes y Route:
 
     HOC que engloba a otros componentes y definimos las rutas navegables de nuestra aplicación.
+    
+6. Firebase:
+
+    Se utiliza Firebase y Firestone para la gestión de la base de datos y su respuesta en las peticiones asincronas.
 
 ## Para poder ver la aplicación desde local
 ***
