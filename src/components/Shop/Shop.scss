@@ -1,0 +1,21 @@
+.cardForm {
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+    .inputForm {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 97%;
+      .labelForm {
+        margin-left: 6px;
+        padding-top: 3%;
+      }
+    }
+      .btnForm{
+        margin-bottom: 5px;
+      }
+  }
+}

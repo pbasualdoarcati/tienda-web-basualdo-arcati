@@ -17,15 +17,15 @@ import { db } from "../../firebase/firebaseConfig";
 import "./ItemDetailContainer.scss";
 
 function ItemDetailContainer() {
-  let itemParams = useParams(); 
-  let itemID = itemParams.id;
 
-  const [itemDetail, setItemDetail] = useState(null);
+  const { id } = useParams();
+
+  const [itemDetail, setItemDetail] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getItem = async () => {
-      const q = query(collection(db, "Items"), where(documentId(), '==', itemID));
+      const q = query(collection(db, "Items"), where(documentId(), '==', id));
       const docs = [];
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
@@ -33,12 +33,9 @@ function ItemDetailContainer() {
       });
       setItemDetail(docs[0]);
       setLoading(false);
-      console.log(itemID)
-      console.log(docs)
-      console.log(itemDetail)
     };
     getItem();
-  }, [itemID]);
+  }, [id]);
 
   let initial = 0;
 
