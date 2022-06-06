@@ -21,8 +21,7 @@ function ItemListContainer() {
   const [loading, setLoading] = useState(true);
   const { setAllItem } = useContext(CartContext);
 
-  let category = useParams();
-  let clothing = category.categoryID;
+  const { categoryID } = useParams()
 
   useEffect(() => {
     const getItem = async () => {
@@ -34,13 +33,13 @@ function ItemListContainer() {
       });
       setItems(docs);
       setAllItem(docs);
-      if (category.categoryID === undefined) {
+      if (categoryID === undefined) {
         setItems(docs);
         setTimeout(() => {
           setLoading(false);
         }, 1000);
       } else {
-        setItems(docs.filter((elem) => elem.category === clothing));
+        setItems(docs.filter((elem) => elem.category === categoryID));
 
         setTimeout(() => {
           setLoading(false);
@@ -48,7 +47,8 @@ function ItemListContainer() {
       }
     };
     getItem();
-  }, [clothing]);
+  }, [categoryID, setAllItem]);
+
 
   return (
     <>

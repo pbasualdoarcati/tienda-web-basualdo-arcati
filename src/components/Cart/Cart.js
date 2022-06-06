@@ -13,10 +13,17 @@ import Footer from "../Footer/Footer";
 //Style
 
 import "./Cart.scss";
+import Shop from "../Shop/Shop";
 
 function Cart() {
-  const { product, totalPrice, clearCart, deleteItem } =
+  const { product, totalPrice, clearCart, deleteItem, setShow, show } =
     useContext(CartContext);
+
+
+
+  const handleClick = () => {
+    setShow(true);
+  };
 
   return (
     <>
@@ -37,13 +44,15 @@ function Cart() {
               </ListGroup.Item>
             </ListGroup>
             <Button onClick={clearCart}>Vaciar carrito</Button>
-            <Button>Terminar mi compra</Button>
+            {!show && (
+              <Button onClick={() => handleClick()}>Terminar mi compra</Button>
+            )}
           </Card>
           <Card className="cartContainer">
             {product.map((item) => {
               return (
-                <div>
-                  <Card className="cardCart" key={item.id}>
+                <div key={item.id}>
+                  <Card className="cardCart">
                     <div>
                       <Card.Img
                         variant="left"
@@ -75,6 +84,13 @@ function Cart() {
               );
             })}
           </Card>
+          {show && (
+            <>
+              <Shop
+                showShop = {show}
+              />
+            </>
+          )}
         </>
       ) : (
         <>
