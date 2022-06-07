@@ -13,6 +13,7 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => {
     setProduct([]);
+    setShow(false);
   };
 
   const addItem = (item, quantity) => {
@@ -70,7 +71,7 @@ export const CartProvider = ({ children }) => {
     search,
     setSearch,
     setShow,
-    show
+    show,
   };
 
   return <CartContext.Provider value={data}>{children}</CartContext.Provider>;
