@@ -3,7 +3,13 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { collection, query, getDocs, where, documentId } from "firebase/firestore";
+import {
+  collection,
+  query,
+  getDocs,
+  where,
+  documentId,
+} from "firebase/firestore";
 
 //Components
 
@@ -17,15 +23,13 @@ import { db } from "../../firebase/firebaseConfig";
 import "./ItemDetailContainer.scss";
 
 function ItemDetailContainer() {
-
   const { id } = useParams();
-
   const [itemDetail, setItemDetail] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getItem = async () => {
-      const q = query(collection(db, "Items"), where(documentId(), '==', id));
+      const q = query(collection(db, "Items"), where(documentId(), "==", id));
       const docs = [];
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {

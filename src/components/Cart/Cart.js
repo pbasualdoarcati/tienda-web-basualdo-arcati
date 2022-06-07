@@ -51,7 +51,7 @@ function Cart() {
           <Card className="cartContainer">
             {product.map((item) => {
               return (
-                <div key={item.id}>
+                <div key={item.item.id}>
                   <Card className="cardCart">
                     <div>
                       <Card.Img
@@ -87,7 +87,9 @@ function Cart() {
           {show && (
             <>
               <Shop
-                showShop = {show}
+                showShop={show}
+                product={product}
+                total={totalPrice()}
               />
             </>
           )}
