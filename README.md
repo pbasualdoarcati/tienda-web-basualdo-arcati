@@ -13,10 +13,17 @@ En desarollo
 ## Dependencias Descargadas
 ***
 - Sass
+    Se utiliza Sass por ser un gran precompilador de css generando una facilidad notable en la implementación de hojas de estilos.
 - React-Bootstrap
+    Se utiliza react-bootstrap por ser una versión limpia de bootstrap y fixeada para utilizar en react, la misma cuanta con los componentes esenciales de bootstrap adaptados para react.
 - Material UI
+    Se utiliza Material UI solo en los iconos a gusto personal.
 - Sweet Alert
+    Se utiliza Sweet Alert con el fin de modificar y darle estilos a las alertas utilizadas en la app.
 - React-Router-Dom
+    Se utiliza react-router-dom por ser esencial a la hora de controlar las rutas navegables de nuestra aplicación.
+- Firebase
+    Se utiliza firebase como conexión con nuestra db de los productos, ordenes y usuarios.
 
 ## Módulos y Hooks utilizados
 ***
