@@ -17,9 +17,13 @@ function Shop({ showShop, product, total }) {
   const [order, setOrder] = useState("");
   let today = new Date();
   const initialState = {
-    name: "",
-    number: "",
-    email: "",
+    buyer: [
+      {
+        name: "",
+        number: "",
+        email: "",
+      },
+    ],
     items: [
       {
         id: " ",
@@ -34,30 +38,28 @@ function Shop({ showShop, product, total }) {
   const [values, setValues] = useState(initialState);
 
   const handleOnChange = (e) => {
-    
     const { name, value } = e.target;
     setValues({
       ...values,
-      [name]: value,
+      buyer: [{ ...values.buyer[0], [name]: value }],
       items: product,
-      total: total,
+      total: Number(total),
       date: today,
     });
   };
-  
+
   const onSubmit = async (e) => {
     e.preventDefault();
     const docRef = await addDoc(collection(db, "Orders"), values);
     setOrder(docRef.id);
     setValues(initialState);
   };
-  console.log(product)
+  console.log(product);
 
   const handleClose = () => {
     setShowModal(false);
     setShow(false);
   };
-
 
   return (
     <>
