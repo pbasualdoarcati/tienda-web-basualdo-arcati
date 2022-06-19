@@ -45,7 +45,7 @@ function Cart() {
             </ListGroup>
             <Button onClick={clearCart}>Vaciar carrito</Button>
             {!show && (
-              <Button onClick={() => handleClick()}>Terminar mi compra</Button>
+              <Button onClick={() => handleClick()} style={{ marginTop : "1px" }} >Terminar mi compra</Button>
             )}
           </Card>
           <Card className="cartContainer">

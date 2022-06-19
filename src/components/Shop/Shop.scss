@@ -1,5 +1,4 @@
 .cardForm {
-  
   .form {
     display: flex;
     flex-direction: column;
@@ -13,9 +12,26 @@
         margin-left: 6px;
         padding-top: 3%;
       }
-    }
-      .btnForm{
-        margin-bottom: 5px;
+      .labelRegister {
+        display: flex;
+        margin-top: 10px;
+        align-items: center;
+        .btnRegister {
+          border-radius: 50px;
+          border-color: #dc3545;
+          background-color: #dc3545;
+          color: #fff;
+        }
       }
+    }
+    .btnForm {
+      margin-bottom: 5px;
+      border-radius: 50px;
+    }
+    .btnSession {
+      margin: auto;
+      margin-top: 5px;
+      border-radius: 50px;
+    }
   }
 }

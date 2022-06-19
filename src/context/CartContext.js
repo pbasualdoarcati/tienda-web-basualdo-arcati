@@ -10,7 +10,8 @@ export const CartProvider = ({ children }) => {
   const [product, setProduct] = useState(
     cartLocalStorage ? cartLocalStorage : []
   );
-
+  const [theme, setTheme] = useState("light");
+  const [user, setUser] = useState(null);
   const clearCart = () => {
     setProduct([]);
     setShow(false);
@@ -72,6 +73,10 @@ export const CartProvider = ({ children }) => {
     setSearch,
     setShow,
     show,
+    theme,
+    setTheme,
+    user,
+    setUser,
   };
 
   return <CartContext.Provider value={data}>{children}</CartContext.Provider>;

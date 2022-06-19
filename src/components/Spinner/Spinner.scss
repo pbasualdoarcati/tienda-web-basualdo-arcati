@@ -1,13 +1,29 @@
-.spinnerClass{
-    display: flex;
-    flex-direction: column;
+.light {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  background-color: #e7e7e6;
+  border: 0;
+  .spinnerText {
+    font-size: 2rem;
+  }
+  .spinnerEffect {
     margin: auto;
-    background-color: #e7e7e6;
-    border: 0;
-    .spinnerText{
-        font-size: 2rem;
-    }
-    .spinnerEffect{
-        margin: auto;
-    }
+  }
+}
+
+//Theme Dark
+
+.dark {
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  background-color: #181819;
+  .spinnerText {
+    font-size: 2rem;
+    color: #e7e7e6;
+  }
+  .spinnerEffect {
+    margin: auto;
+  }
 }

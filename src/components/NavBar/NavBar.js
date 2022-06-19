@@ -4,6 +4,9 @@ import { Link, NavLink } from "react-router-dom";
 import { useState, useContext } from "react";
 import { Button, Nav, Navbar } from "react-bootstrap";
 import CartWidget from "../CartWidget/CartWidget";
+import { Switch } from "@mui/material";
+import Brightness3Icon from "@mui/icons-material/Brightness3";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
 
 //Components
 
@@ -13,10 +16,11 @@ import { CartContext } from "../../context/CartContext";
 //Styles
 
 import "./NavBar.scss";
+import { useEffect } from "react";
 
-function NavBar() {
-  const { product } = useContext(CartContext);
-
+function NavBar({ themeChange } ) {
+  const { product, theme, setTheme } = useContext(CartContext);
+  const [logo, setLogo] = useState('');
   const [click, setClick] = useState("");
 
   const showHamburger = () => {
@@ -29,18 +33,29 @@ function NavBar() {
 
   let activeClassName = "active";
   let defaultClassName = "link";
+  useEffect(() => {
+
+    if (theme === "dark") {
+      setLogo("/images/LogoTiendaBlack.png");
+    } else {
+      setLogo("/images/LogoTienda.png");
+    }
+    },
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [theme]);
 
   return (
     <Navbar
-      bg="light"
-      variant="light"
+      bg={theme}
+      variant={theme}
       expand="lg"
-      className="d-flex justify-content-between navBar"
+      className={theme}
       sticky="top"
     >
       <Link to="/">
         <Navbar.Brand>
-          <img src="images/LogoTienda.png" alt="Logo tienda" />
+          <img src={logo} alt="Logo tienda" className="navImg" />
         </Navbar.Brand>
       </Link>
       <div className={`nav__menuHamburger  ${click}`}>
@@ -52,12 +67,12 @@ function NavBar() {
         >
           X
         </Button>
+
         <SearchButton />
-        
+
         <ul className="nav__menuHamburgerNav">
           <li className="nav__menuHamburger--item">
-            <Link to="/Cart"
-              onClick={() => showHamburger()}>
+            <Link to="/Cart" onClick={() => showHamburger()}>
               {product.length > 0 && <CartWidget cantItem={product.length} />}
             </Link>
           </li>
@@ -116,10 +131,17 @@ function NavBar() {
               GitHub
             </NavLink>
           </li>
+          <li className="nav__menuHamburger--item">
+            <>{theme === "light" ? <Brightness7Icon /> : <Brightness3Icon />}</>
+            <Switch
+              checked={theme === "dark"}
+              onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
+            />
+          </li>
         </ul>
       </div>
       <button
-        className="navbar-toggler"
+        className="navbar-toggler navIcon"
         type="button"
         onClick={() => showHamburger()}
       >
@@ -171,7 +193,16 @@ function NavBar() {
           <Link to="/Cart">
             {product.length > 0 && <CartWidget cantItem={product.length} />}
           </Link>
+
           <SearchButton />
+          <div>
+            <>{theme === "light" ? <Brightness7Icon /> : <Brightness3Icon className="iconColor"/>}</>
+            <Switch
+              checked={theme === "dark"}
+              onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
+              onClick={() => themeChange(theme === 'dark' ? 'Applight' :'Appdark')}
+            />
+          </div>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

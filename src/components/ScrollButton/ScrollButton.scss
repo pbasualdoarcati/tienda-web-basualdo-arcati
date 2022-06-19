@@ -1,8 +1,19 @@
-.scrollButton{
-    display: flex;
-    justify-content: flex-end;
-    .button{
-        font-size: 5rem ;
-        color: #000;
-    }
+.light {
+  display: flex;
+
+  .buttonFooter {
+    font-size: 5rem;
+    color: #000;
+  }
+}
+
+//Theme dark
+
+.dark {
+  display: flex;
+
+  .buttonFooter {
+    font-size: 5rem;
+    color: #fff;
+  }
 }

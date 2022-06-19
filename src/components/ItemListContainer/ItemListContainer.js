@@ -19,7 +19,7 @@ import "./ItemListContainer.scss";
 function ItemListContainer() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { setAllItem } = useContext(CartContext);
+  const { setAllItem, theme } = useContext(CartContext);
 
   const { categoryID } = useParams()
 
@@ -52,12 +52,13 @@ function ItemListContainer() {
 
   return (
     <>
+      <div className={theme}>
       <Card className="cardContainer">
         <Card.Body className="itemList">
           <ItemList items={items} loading={loading} />
         </Card.Body>
       </Card>
-
+      </div>
       <ScrollButton />
       <Footer />
     </>
