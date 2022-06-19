@@ -1,13 +1,10 @@
 //Elements and modules
 
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Button, FormControl, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import swal from "sweetalert";
-
-//Components
-
-import { CartContext } from "../../context/CartContext";
 
 //Styles
 
@@ -15,7 +12,6 @@ import "./SearchButton.scss";
 
 function SearchButton() {
   const [inputText, setInputText] = useState("");
-  const { allItem, setSearch, search } = useContext(CartContext);
 
   const handleChange = (e) => {
     setInputText(e.target.value);
@@ -23,25 +19,29 @@ function SearchButton() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const inputTextSanit = inputText.toLowerCase();
+    let inputTextSanit = inputText.replace(/\s/g, "");
     if (inputTextSanit === "") {
       swal({
         title: "Ingrese un producto",
         icon: "warning",
+        button: "Aceptar",
       });
-    } else {
-      let itemFilter = allItem.filter((el) =>
-        el.title.toLowerCase().includes(inputTextSanit)
-      );
-      setSearch(itemFilter);
       setInputText("");
+      return false;
+    } else if (inputTextSanit.length < 3) {
+      swal({
+        title: "Ingrese un producto con mas de 3 caracteres",
+        icon: "warning",
+        button: "Aceptar",
+      });
+      setInputText(" ");
+      return false;
+    } else {
+      navigate(`/result/${inputTextSanit}`);
     }
+    setInputText("");
   };
-
-  console.log(search);
-
-  //Falta hacer el componente para mostrar algo asi como un listado de los productos que coinciden con la busqueda
-  //Podemos pasarle por useParams para que navegue por ahi
+  const navigate = useNavigate();
 
   return (
     <>

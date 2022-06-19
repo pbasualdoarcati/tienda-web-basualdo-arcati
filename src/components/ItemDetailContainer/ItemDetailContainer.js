@@ -1,6 +1,6 @@
 //Elements and modules
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import {
@@ -17,6 +17,7 @@ import ItemDetail from "../ItemDetail/ItemDetail";
 import ScrollButton from "../ScrollButton/ScrollButton";
 import Footer from "../Footer/Footer";
 import { db } from "../../firebase/firebaseConfig";
+import { CartContext } from "../../context/CartContext";
 
 //Style
 
@@ -26,7 +27,7 @@ function ItemDetailContainer() {
   const { id } = useParams();
   const [itemDetail, setItemDetail] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const { theme } = useContext(CartContext);
   useEffect(() => {
     const getItem = async () => {
       const q = query(collection(db, "Items"), where(documentId(), "==", id));
@@ -46,7 +47,7 @@ function ItemDetailContainer() {
   return (
     <>
       <Card className="cardContainer">
-        <Card.Body className="itemDetailContainer">
+        <Card.Body className={theme}>
           <ItemDetail
             loading={loading}
             itemDetail={itemDetail}
