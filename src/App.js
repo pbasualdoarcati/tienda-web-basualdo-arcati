@@ -15,6 +15,7 @@ import Result from "./components/Result/Result";
 //Style
 
 import "./App.scss";
+import Error404 from "./components/404/Error404";
 
 function App() {
   const [theme, setTheme] = useState("Applight");
@@ -35,6 +36,7 @@ function App() {
             <Route path="/item/:id" element={<ItemDetailContainer />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/result/:result" element={<Result />} />
+            <Route path="*" element={<Error404 />} />
           </Routes>
         </div>
       </Router>
