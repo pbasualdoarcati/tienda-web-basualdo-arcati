@@ -4,7 +4,6 @@ import React, { useContext } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import { Link } from "react-router-dom";
 
 //Components
 import { CartContext } from "../../context/CartContext";
@@ -15,18 +14,25 @@ import "./Footer.scss";
 
 function Footer() {
   const { theme } = useContext(CartContext);
-
   return (
     <footer className={theme}>
       <Navbar bg="light" variant="light" expand="lg" className="footerNav">
         <Nav className="navElement">
           <p>2022 © All rights reserved</p>
-          <Link to="https://www.linkedin.com/in/pbasualdoarcati">
+          <a
+            target="_blank"
+            href="https://www.linkedin.com/in/pbasualdoarcati"
+            rel="noreferrer"
+          >
             <LinkedInIcon />
-          </Link>
-          <Link to="https://github.com/pbasualdoarcati/tienda-web-basualdo-arcati">
+          </a>
+          <a
+            href="https://github.com/pbasualdoarcati/tienda-web-basualdo-arcati"
+            target="_blank"
+            rel="noreferrer"
+          >
             <GitHubIcon />
-          </Link>
+          </a>
         </Nav>
       </Navbar>
     </footer>
