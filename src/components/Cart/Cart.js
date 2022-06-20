@@ -19,8 +19,6 @@ function Cart() {
   const { product, totalPrice, clearCart, deleteItem, setShow, show } =
     useContext(CartContext);
 
-
-
   const handleClick = () => {
     setShow(true);
   };
@@ -43,9 +41,15 @@ function Cart() {
                 <Card.Text>${totalPrice()}</Card.Text>
               </ListGroup.Item>
             </ListGroup>
-            <Button onClick={clearCart}>Vaciar carrito</Button>
+            <Button variant="danger" onClick={clearCart}>Vaciar carrito</Button>
             {!show && (
-              <Button onClick={() => handleClick()} style={{ marginTop : "1px" }} >Terminar mi compra</Button>
+              <Button
+                variant="success"
+                onClick={() => handleClick()}
+                style={{ marginTop: "1px" }}
+              >
+                Terminar mi compra
+              </Button>
             )}
           </Card>
           <Card className="cartContainer">
@@ -62,7 +66,7 @@ function Cart() {
                     </div>
                     <Card.Body>
                       <div className="btnCartDelete">
-                        <Button onClick={() => deleteItem(item.item.id)}>
+                        <Button variant="danger" onClick={() => deleteItem(item.item.id)}>
                           X{" "}
                         </Button>
                       </div>
@@ -86,11 +90,7 @@ function Cart() {
           </Card>
           {show && (
             <>
-              <Shop
-                showShop={show}
-                product={product}
-                total={totalPrice()}
-              />
+              <Shop showShop={show} product={product} total={totalPrice()} />
             </>
           )}
         </>

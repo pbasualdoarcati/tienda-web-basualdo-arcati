@@ -18,9 +18,9 @@ import { CartContext } from "../../context/CartContext";
 import "./NavBar.scss";
 import { useEffect } from "react";
 
-function NavBar({ themeChange } ) {
+function NavBar({ themeChange }) {
   const { product, theme, setTheme } = useContext(CartContext);
-  const [logo, setLogo] = useState('');
+  const [logo, setLogo] = useState("");
   const [click, setClick] = useState("");
 
   const showHamburger = () => {
@@ -33,17 +33,18 @@ function NavBar({ themeChange } ) {
 
   let activeClassName = "active";
   let defaultClassName = "link";
-  useEffect(() => {
-
-    if (theme === "dark") {
-      setLogo("/images/LogoTiendaBlack.png");
-    } else {
-      setLogo("/images/LogoTienda.png");
-    }
+  useEffect(
+    () => {
+      if (theme === "dark") {
+        setLogo("/images/LogoTiendaBlack.png");
+      } else {
+        setLogo("/images/LogoTienda.png");
+      }
     },
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [theme]);
+    [theme]
+  );
 
   return (
     <Navbar
@@ -196,11 +197,19 @@ function NavBar({ themeChange } ) {
 
           <SearchButton />
           <div>
-            <>{theme === "light" ? <Brightness7Icon /> : <Brightness3Icon className="iconColor"/>}</>
+            <>
+              {theme === "light" ? (
+                <Brightness7Icon />
+              ) : (
+                <Brightness3Icon className="iconColor" />
+              )}
+            </>
             <Switch
               checked={theme === "dark"}
               onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
-              onClick={() => themeChange(theme === 'dark' ? 'Applight' :'Appdark')}
+              onClick={() =>
+                themeChange(theme === "dark" ? "Applight" : "Appdark")
+              }
             />
           </div>
         </Nav>

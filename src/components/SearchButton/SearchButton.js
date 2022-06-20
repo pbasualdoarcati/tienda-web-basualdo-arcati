@@ -56,7 +56,6 @@ function SearchButton() {
         />
         <Button
           variant="outline-secondary"
-          id="buttonSearch"
           className="buttonSearch"
           type="submit"
         >

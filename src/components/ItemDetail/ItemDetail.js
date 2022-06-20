@@ -17,8 +17,10 @@ import "./ItemDetail.scss";
 function ItemDetail({ loading, itemDetail, initial }) {
   const { addItem, isInCart } = useContext(CartContext);
 
+  // eslint-disable-next-line no-unused-vars
   const [quantity, setQuantity] = useState(0);
 
+  // eslint-disable-next-line no-unused-vars
   const [itemID, setItemID] = useState();
 
   const onAdd = (quantity, itemID) => {

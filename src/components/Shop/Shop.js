@@ -7,7 +7,9 @@ import {
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
+import swal from "sweetalert";
 
 //Components
 import { CartContext } from "../../context/CartContext";
@@ -64,6 +66,7 @@ function Shop({ showShop, product, total }) {
   });
 
   async function login(email, password) {
+    // eslint-disable-next-line no-unused-vars
     const user = await createUserWithEmailAndPassword(
       auth,
       email,
@@ -71,7 +74,6 @@ function Shop({ showShop, product, total }) {
     ).then((usuarioFirebase) => {
       return usuarioFirebase;
     });
-    console.log("Usuario creado: ", user);
   }
 
   const handleOnChange = (e) => {
@@ -98,7 +100,6 @@ function Shop({ showShop, product, total }) {
       total: Number(total),
       date: today,
     });
-    console.log(userInitial);
   };
 
   const onSubmitRegister = async (e) => {
@@ -112,17 +113,22 @@ function Shop({ showShop, product, total }) {
   };
   const onSubmitSesion = async (e) => {
     e.preventDefault();
+
+    // eslint-disable-next-line no-unused-vars
     const user = await signInWithEmailAndPassword(
       auth,
       userInitial.user[0].email,
       userInitial.user[0].password
-    );
-    console.log(user.user.email);
+    ).catch(() => {
+      swal({
+        title: "Usuario o contraseña incorrectos",
+        icon: "error",
+        button: "Aceptar",
+      });
+    });
     const docRef = await addDoc(collection(db, "Orders"), values);
     setOrder(docRef.id);
-    console.log(docRef.id);
   };
-
   const handleClose = () => {
     setShowModal(false);
     setShow(false);
@@ -130,6 +136,7 @@ function Shop({ showShop, product, total }) {
   const handleRegister = () => {
     setMiSesion(false);
   };
+
   return (
     <>
       <Modal className="cardForm" show={showModal} onHide={handleClose}>
@@ -152,6 +159,7 @@ function Shop({ showShop, product, total }) {
                   <Button
                     variant="danger"
                     onClick={() => clearCart()}
+                    onFocus={() => signOut(auth)}
                     className="btnForm"
                   >
                     Salir
@@ -160,12 +168,9 @@ function Shop({ showShop, product, total }) {
               </>
             ) : (
               <>
-                <h1>Iniciar Sesión</h1>
+                <h1 className="title">Iniciar Sesión</h1>
                 <Form onSubmit={onSubmitSesion} className="form">
-                  <Form.Group
-                    controlId="formBasicEmail"
-                    className="mb-3 inputForm"
-                  >
+                  <Form.Group className="mb-3 inputForm">
                     <Form.Label className="labelForm">Email</Form.Label>
                     <Form.Control
                       type="email"
@@ -174,6 +179,7 @@ function Shop({ showShop, product, total }) {
                       name="email"
                       value={userInitial.email}
                       onChange={handleOnChangeSession}
+                      required={true}
                     />
                     <Form.Label className="labelForm">Contraseña</Form.Label>
                     <Form.Control
@@ -183,15 +189,18 @@ function Shop({ showShop, product, total }) {
                       name="password"
                       value={userInitial.password}
                       onChange={handleOnChangeSession}
+                      required={true}
                     />
-                    <Button
-                      variant="primary"
-                      type="submit"
-                      className="btnForm btnSession"
-                    >
-                      {" "}
-                      Iniciar Sesión{" "}
-                    </Button>
+                    <div className="btnSession">
+                      <Button
+                        variant="success"
+                        type="submit"
+                        className="btnForm btnSession"
+                      >
+                        {" "}
+                        Iniciar Sesión{" "}
+                      </Button>
+                    </div>
                     <div className="labelRegister">
                       <Form.Label>¿No tienes cuenta?</Form.Label>
                       <Button
@@ -223,6 +232,7 @@ function Shop({ showShop, product, total }) {
                   <Button
                     variant="danger"
                     onClick={() => clearCart()}
+                    onFocus={() => signOut(auth)}
                     className="btnForm"
                   >
                     Salir
@@ -232,8 +242,8 @@ function Shop({ showShop, product, total }) {
             ) : (
               <>
                 <Form className="form" onSubmit={onSubmitRegister}>
-                  <Form.Group className="mb-3 inputForm" controlId="name">
-                    <h1>Registrarse</h1>
+                  <Form.Group className="mb-3 inputForm">
+                    <h1 className="title">Registrarse</h1>
                     <Form.Label className="labelForm">Nombre</Form.Label>
                     <Form.Control
                       type="text"
@@ -242,6 +252,10 @@ function Shop({ showShop, product, total }) {
                       name="name"
                       value={values.name}
                       onChange={handleOnChange}
+                      minLength="3"
+                      required={true}
+                      pattern="[a-zA-Z]{3,}"
+                      title="Debe contener al menos 3 letras"
                     />
                     <Form.Text className="text-muted labelForm">
                       Ej: Juan
@@ -254,6 +268,10 @@ function Shop({ showShop, product, total }) {
                       name="surname"
                       value={values.surname}
                       onChange={handleOnChange}
+                      minLength="3"
+                      required={true}
+                      pattern="[a-zA-Z]{3,}"
+                      title="Solo se permiten letras"
                     />
                     <Form.Text className="text-muted labelForm">
                       Ej: Juan
@@ -267,6 +285,9 @@ function Shop({ showShop, product, total }) {
                       name="email"
                       value={values.email}
                       onChange={handleOnChange}
+                      required={true}
+                      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                      title="Debe ser un email válido"
                     />
                     <Form.Text className="text-muted labelForm">
                       Ej: example@example.com
@@ -279,6 +300,10 @@ function Shop({ showShop, product, total }) {
                       name="password"
                       value={values.password}
                       onChange={handleOnChange}
+                      minLength="6"
+                      required={true}
+                      pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}"
+                      title="Debe contener al menos 6 caracteres, una mayúscula, una minúscula, un número y un caracter especial"
                     />
                     <Form.Text className="text-muted labelForm">
                       Ej: Ejemplo.123

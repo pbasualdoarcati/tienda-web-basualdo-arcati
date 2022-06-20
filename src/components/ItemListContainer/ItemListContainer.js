@@ -21,7 +21,7 @@ function ItemListContainer() {
   const [loading, setLoading] = useState(true);
   const { setAllItem, theme } = useContext(CartContext);
 
-  const { categoryID } = useParams()
+  const { categoryID } = useParams();
 
   useEffect(() => {
     const getItem = async () => {
@@ -49,15 +49,14 @@ function ItemListContainer() {
     getItem();
   }, [categoryID, setAllItem]);
 
-
   return (
     <>
       <div className={theme}>
-      <Card className="cardContainer">
-        <Card.Body className="itemList">
-          <ItemList items={items} loading={loading} />
-        </Card.Body>
-      </Card>
+        <Card className="cardContainer">
+          <Card.Body className="itemList">
+            <ItemList items={items} loading={loading} />
+          </Card.Body>
+        </Card>
       </div>
       <ScrollButton />
       <Footer />
