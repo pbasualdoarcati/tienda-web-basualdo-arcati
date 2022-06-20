@@ -25,7 +25,6 @@ function ItemCount({ stock, initial, onAdd, itemId }) {
     disableButton = true;
   }
 
-
   return (
     <>
       <div>
@@ -38,7 +37,7 @@ function ItemCount({ stock, initial, onAdd, itemId }) {
             onClick={() => handlerClick(-1)}
           >
             {" "}
-          - {" "}
+            -{" "}
           </Button>
 
           <span> {counterItem} </span>
@@ -49,7 +48,7 @@ function ItemCount({ stock, initial, onAdd, itemId }) {
             className="itemButton"
             onClick={() => handlerClick(+1)}
           >
-             {" "}
+            {" "}
             +{" "}
           </Button>
         </div>

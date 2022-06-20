@@ -14,12 +14,11 @@ import { CartContext } from "../../context/CartContext";
 import "./Footer.scss";
 
 function Footer() {
-
   const { theme } = useContext(CartContext);
-  
+
   return (
     <footer className={theme}>
-      <Navbar bg="light" variant="light" expand="lg" className="footerNav" >
+      <Navbar bg="light" variant="light" expand="lg" className="footerNav">
         <Nav className="navElement">
           <p>2022 © All rights reserved</p>
           <Link to="https://www.linkedin.com/in/pbasualdoarcati">
