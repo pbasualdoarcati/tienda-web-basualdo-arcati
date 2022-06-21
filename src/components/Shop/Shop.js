@@ -113,23 +113,57 @@ function Shop({ showShop, product, total }) {
     setOrder(docRef.id);
     setValues(initialState);
   };
-  const onSubmitSesion = async (e) => {
-    e.preventDefault();
-    const user = await signInWithEmailAndPassword(
-      auth,
-      userInitial.user[0].email,
-      userInitial.user[0].password
-    ).catch(() => {
-      swal({
-        title: "Usuario o contraseña incorrectos",
-        icon: "error",
-        button: "Aceptar",
-      });
-    });
-    console.log(user.user.email);
-    const docRef = await addDoc(collection(db, "Orders"), values);
-    setOrder(docRef.id);
-  };
+  // const onSubmitSession = async (e) => {
+  //   e.preventDefault()
+  //   try {
+  //     const user = await signInWithEmailAndPassword(
+  //       auth,
+  //       userInitial.user[0].email,
+  //       userInitial.user[0].password
+  //     )
+  //     return user
+  //   }
+  //   catch (error) { 
+  //     swal({
+  //       title: "Usuario o contraseña incorrectos",
+  //       icon: "error",
+  //       button: "Aceptar",
+  //     });
+  //   }
+  //   const docRef = await addDoc(collection(db, "Orders"), values);
+  //   setOrder(docRef.id);
+  //  }
+  async function loginEmailPassword(email, password) {
+    signInWithEmailAndPassword(auth, email, password);
+    console.log("login");
+  }
+  async function onSubmitSession(e) {
+    e.preventDefault()
+    const email = userInitial.user[0].email;
+    const password = userInitial.user[0].password;
+    try {
+      await loginEmailPassword(email, password)
+      .then((user) => {
+        console.log(user)
+      })
+      .catch((error) => { 
+          console.log(error);
+      })
+      
+      console.log(loginEmailPassword(email, password));
+    }
+    catch (error) {
+      // swal({
+      //   title: "Usuario o contraseña incorrectos",
+      //   icon: "error",
+      //   button: "Aceptar",
+      // });
+      console.log(error);
+     }
+  }
+  
+    //FALTA CORREGIR QUE PASA SI EL USUARIO Y CONTRASEÑA ES INCORRECTO
+  ;
   const handleClose = () => {
     setShowModal(false);
     setShow(false);
@@ -176,7 +210,7 @@ function Shop({ showShop, product, total }) {
             ) : (
               <>
                 <h1 className="title">Iniciar Sesión</h1>
-                <Form onSubmit={onSubmitSesion} className="form">
+                <Form onSubmit={onSubmitSession} className="form">
                   <Form.Group className="mb-3 inputForm">
                     <Form.Label className="labelForm">Email</Form.Label>
                     <Form.Control
