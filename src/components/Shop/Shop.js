@@ -133,11 +133,11 @@ function Shop({ showShop, product, total }) {
   //   const docRef = await addDoc(collection(db, "Orders"), values);
   //   setOrder(docRef.id);
   //  }
-  async function loginEmailPassword(email, password) {
+  const loginEmailPassword = async (email, password) =>{
     signInWithEmailAndPassword(auth, email, password);
     console.log("login");
   }
-  async function onSubmitSession(e) {
+  const onSubmitSession = async (e)=> {
     e.preventDefault()
     const email = userInitial.user[0].email;
     const password = userInitial.user[0].password;
