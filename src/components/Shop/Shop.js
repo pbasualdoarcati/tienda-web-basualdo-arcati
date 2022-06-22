@@ -123,7 +123,7 @@ function Shop({ showShop, product, total }) {
   //     )
   //     return user
   //   }
-  //   catch (error) { 
+  //   catch (error) {
   //     swal({
   //       title: "Usuario o contraseña incorrectos",
   //       icon: "error",
@@ -133,37 +133,51 @@ function Shop({ showShop, product, total }) {
   //   const docRef = await addDoc(collection(db, "Orders"), values);
   //   setOrder(docRef.id);
   //  }
-  const loginEmailPassword = async (email, password) =>{
-    signInWithEmailAndPassword(auth, email, password);
-    console.log("login");
-  }
-  const onSubmitSession = async (e)=> {
-    e.preventDefault()
-    const email = userInitial.user[0].email;
-    const password = userInitial.user[0].password;
-    try {
-      await loginEmailPassword(email, password)
+  const loginEmailPassword = async (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const onSubmitSession = async (e) => {
+    e.preventDefault();
+    await loginEmailPassword(
+      userInitial.user[0].email,
+      userInitial.user[0].password
+    )
       .then((user) => {
-        console.log(user)
+        if (user === undefined) {
+          swal({
+            title: "Usuario o contraseña incorrectos",
+            icon: "error",
+            button: "Aceptar",
+          });
+        } else {
+          setUser(user);
+          return;
+        }
       })
-      .catch((error) => { 
-          console.log(error);
-      })
-      
-      console.log(loginEmailPassword(email, password));
+      .catch((error) => {
+        swal({
+          title: "Usuario o contraseña incorrectos",
+          icon: "error",
+          button: "Aceptar",
+        });
+      });
+    if (user === undefined || user === null) {
+      setUser(null);
+      return;
+    } else {
+      swal({
+        title: "Bienvenido usuario",
+        icon: "success",
+        button: "Aceptar",
+      });
+      const docRef = await addDoc(collection(db, "Orders"), values);
+
+      setOrder(docRef.id);
     }
-    catch (error) {
-      // swal({
-      //   title: "Usuario o contraseña incorrectos",
-      //   icon: "error",
-      //   button: "Aceptar",
-      // });
-      console.log(error);
-     }
-  }
-  
-    //FALTA CORREGIR QUE PASA SI EL USUARIO Y CONTRASEÑA ES INCORRECTO
-  ;
+  };
+
+  //FALTA CORREGIR QUE PASA SI EL USUARIO Y CONTRASEÑA ES INCORRECTO
   const handleClose = () => {
     setShowModal(false);
     setShow(false);
