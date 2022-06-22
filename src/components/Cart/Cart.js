@@ -41,7 +41,9 @@ function Cart() {
                 <Card.Text>${totalPrice()}</Card.Text>
               </ListGroup.Item>
             </ListGroup>
-            <Button variant="danger" onClick={clearCart}>Vaciar carrito</Button>
+            <Button variant="danger" onClick={clearCart}>
+              Vaciar carrito
+            </Button>
             {!show && (
               <Button
                 variant="success"
@@ -66,7 +68,10 @@ function Cart() {
                     </div>
                     <Card.Body>
                       <div className="btnCartDelete">
-                        <Button variant="danger" onClick={() => deleteItem(item.item.id)}>
+                        <Button
+                          variant="danger"
+                          onClick={() => deleteItem(item.item.id)}
+                        >
                           X{" "}
                         </Button>
                       </div>
@@ -96,13 +101,12 @@ function Cart() {
         </>
       ) : (
         <>
-          <h1 className="titleEmpty">Su carrito está vacio</h1>
+          <img src="./images/cartEmpty.png" alt="cart" className="cartImg" />
           <Link to="/" className="goToBack">
             Volver
           </Link>
         </>
       )}
-
       <ScrollButton />
       <Footer />
     </>
