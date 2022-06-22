@@ -124,15 +124,6 @@ function NavBar({ themeChange }) {
             </NavLink>
           </li>
           <li className="nav__menuHamburger--item">
-            <NavLink
-              to="https://github.com/pbasualdoarcati/tienda-web-basualdo-arcati"
-              className="nav-link"
-              onClick={() => showHamburger()}
-            >
-              GitHub
-            </NavLink>
-          </li>
-          <li className="nav__menuHamburger--item">
             <>{theme === "light" ? <Brightness7Icon /> : <Brightness3Icon />}</>
             <Switch
               checked={theme === "dark"}

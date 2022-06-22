@@ -191,7 +191,11 @@ function Shop({ showShop, product, total }) {
       setLoading(true);
     }
   }, [user]);
-
+  const handleBye = () => {
+    clearCart()
+    signOut(auth);
+    setUser(null);
+ }
   return (
     <>
       <Modal className="cardForm" show={showModal} onHide={handleClose}>
@@ -213,8 +217,7 @@ function Shop({ showShop, product, total }) {
                   </Card.Body>
                   <Button
                     variant="danger"
-                    onClick={() => clearCart()}
-                    onFocus={() => signOut(auth)}
+                    onClick={handleBye}
                     className="btnForm"
                   >
                     Salir
@@ -284,8 +287,7 @@ function Shop({ showShop, product, total }) {
                       </Card.Body>
                       <Button
                         variant="danger"
-                        onClick={() => clearCart()}
-                        onFocus={() => signOut(auth)}
+                        onClick={handleBye}
                         className="btnForm"
                       >
                         Salir
