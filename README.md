@@ -8,8 +8,8 @@ El progreso del mismo se verá reflejado aqui con explicación e imagenes.
 
 # Estado del proyecto
 ***
-##Finalizado
-
+Finalizado
+Resumen:
 
 ![resumen](https://user-images.githubusercontent.com/87046340/175163231-7e9a5e24-01d0-448c-aa0f-1f700b317797.gif)
 
