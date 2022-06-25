@@ -120,44 +120,21 @@ function Shop({ showShop, product, total }) {
 
   const onSubmitSession = async (e) => {
     e.preventDefault();
-    await loginEmailPassword(
-      userInitial.user[0].email,
-      userInitial.user[0].password
-    )
-      .then((user) => {
-        if (user === undefined) {
-          swal({
-            title: "Usuario o contraseña incorrectos",
-            icon: "error",
-            button: "Aceptar",
-          });
-        } else {
-          setUser(user);
-          return;
-        }
-      })
-      .catch((error) => {
-        swal({
-          title: "Usuario o contraseña incorrectos",
-          icon: "error",
-          button: "Aceptar",
-        });
-      });
-    if (user === undefined || user === null) {
-      setUser(null);
-      return;
-    } else {
+    try {
+      await loginEmailPassword(
+        userInitial.user[0].email,
+        userInitial.user[0].password
+      );
+      const docRef = await addDoc(collection(db, "Orders"), values);
+      setOrder(docRef.id);
+    } catch (error) {
       swal({
-        title: "Bienvenido usuario",
-        icon: "success",
+        title: "Usuario o contraseña incorrectos",
+        icon: "error",
         button: "Aceptar",
       });
-      const docRef = await addDoc(collection(db, "Orders"), values);
-
-      setOrder(docRef.id);
     }
   };
-
 
   const handleClose = () => {
     setShowModal(false);
@@ -172,11 +149,12 @@ function Shop({ showShop, product, total }) {
       setLoading(true);
     }
   }, [user]);
+
   const handleBye = () => {
-    clearCart()
+    clearCart();
     signOut(auth);
     setUser(null);
- }
+  };
   return (
     <>
       <Modal className="cardForm" show={showModal} onHide={handleClose}>
@@ -231,7 +209,8 @@ function Shop({ showShop, product, total }) {
                     <Button
                       variant="primary"
                       type="submit"
-                      className="btnForm btnSession"
+                        className="btnForm btnSession"
+                        disabled={loading}
                     >
                       {" "}
                       Iniciar Sesión{" "}
