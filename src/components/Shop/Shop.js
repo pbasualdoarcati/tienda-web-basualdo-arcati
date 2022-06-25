@@ -113,26 +113,7 @@ function Shop({ showShop, product, total }) {
     setOrder(docRef.id);
     setValues(initialState);
   };
-  // const onSubmitSession = async (e) => {
-  //   e.preventDefault()
-  //   try {
-  //     const user = await signInWithEmailAndPassword(
-  //       auth,
-  //       userInitial.user[0].email,
-  //       userInitial.user[0].password
-  //     )
-  //     return user
-  //   }
-  //   catch (error) {
-  //     swal({
-  //       title: "Usuario o contraseña incorrectos",
-  //       icon: "error",
-  //       button: "Aceptar",
-  //     });
-  //   }
-  //   const docRef = await addDoc(collection(db, "Orders"), values);
-  //   setOrder(docRef.id);
-  //  }
+
   const loginEmailPassword = async (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
@@ -177,7 +158,7 @@ function Shop({ showShop, product, total }) {
     }
   };
 
-  //FALTA CORREGIR QUE PASA SI EL USUARIO Y CONTRASEÑA ES INCORRECTO
+
   const handleClose = () => {
     setShowModal(false);
     setShow(false);
